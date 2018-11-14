@@ -88,11 +88,11 @@ class Login extends Component {
               <TextInput
                 autoCorrect={false}
                 value={this.state.email}
-                onChangeText={this.emailSet}
                 placeholder="email@domain.com"
-                keyboardType="email-address"
-                onEndEditing={this.focusToPassword}
                 returnKeyType="next"
+                keyboardType="email-address"
+                onChangeText={this.emailSet}
+                onSubmitEditing={this.focusToPassword}
                 style={[compStyles.formInput, styles.input]}
               />
             </View>
@@ -102,9 +102,9 @@ class Login extends Component {
                 secureTextEntry
                 autoCorrect={false}
                 value={this.state.password}
-                onChangeText={() => {}}
                 placeholder="password"
                 returnKeyType="send"
+                onChangeText={this.passwordSet}
                 onSubmitEditing={this.attemptLogin}
                 ref={ref => this.passwordInput = ref}
                 style={[compStyles.formInput, styles.input]}
