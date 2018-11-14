@@ -9,7 +9,6 @@ import {
   View,
 } from 'react-native'
 import { withNavigation } from 'react-navigation'
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { MainTemplate } from '../presentation'
 import config from '../config'
 
@@ -79,58 +78,56 @@ class Register extends Component {
       <MainTemplate
         title="Register"
       >
-        <KeyboardAwareScrollView>
-          <View style={styles.content}>
-            <View style={styles.formInput}>
-              <Text style={styles.inputLabel}>Name</Text>
-              <TextInput
-                value={this.state.name}
-                placeholder="Your Name"
-                returnKeyType="next"
-                onChangeText={this.setName}
-                onSubmitEditing={this.focusToEmail}
-                style={[compStyles.formInput, styles.input]}
-              />
-            </View>
-            <View style={styles.formInput}>
-              <Text style={styles.inputLabel}>E-Mail</Text>
-              <TextInput
-                autoCorrect={false}
-                value={this.state.email}
-                keyboardType="email-address"
-                placeholder="email@domain.com"
-                returnKeyType="next"
-                onChangeText={this.setEmail}
-                onSubmitEditing={this.focusToPassword}
-                ref={ref => this.emailInput = ref}
-                style={[compStyles.formInput, styles.input]}
-              />
-            </View>
-            <View style={styles.formInput}>
-              <Text style={styles.inputLabel}>Password</Text>
-              <TextInput
-                secureTextEntry
-                autoCorrect={false}
-                value={this.state.password}
-                placeholder="password"
-                returnKeyType="send"
-                onChangeText={this.setPassword}
-                onSubmitEditing={this.register}
-                ref={ref => this.passwordInput = ref}
-                style={[compStyles.formInput, styles.input]}
-              />
-            </View>
-            <TouchableOpacity style={styles.btnPrimary} onPress={this.register}>
-              <Text style={styles.btnPrimaryText}>Register</Text>
-            </TouchableOpacity>
-            <View style={styles.footer}>
-              <Text>Already registered?</Text>
-              <TouchableOpacity style={styles.btnGray} onPress={() => {this.goTo('login')}}>
-                <Text style={styles.btnGrayText}>Login</Text>
-              </TouchableOpacity>
-            </View>
+        <View style={styles.content}>
+          <View style={styles.formInput}>
+            <Text style={styles.inputLabel}>Name</Text>
+            <TextInput
+              value={this.state.name}
+              placeholder="Your Name"
+              returnKeyType="next"
+              onChangeText={this.setName}
+              onSubmitEditing={this.focusToEmail}
+              style={[compStyles.formInput, styles.input]}
+            />
           </View>
-        </KeyboardAwareScrollView>
+          <View style={styles.formInput}>
+            <Text style={styles.inputLabel}>E-Mail</Text>
+            <TextInput
+              autoCorrect={false}
+              value={this.state.email}
+              keyboardType="email-address"
+              placeholder="email@domain.com"
+              returnKeyType="next"
+              onChangeText={this.setEmail}
+              onSubmitEditing={this.focusToPassword}
+              ref={ref => this.emailInput = ref}
+              style={[compStyles.formInput, styles.input]}
+            />
+          </View>
+          <View style={styles.formInput}>
+            <Text style={styles.inputLabel}>Password</Text>
+            <TextInput
+              secureTextEntry
+              autoCorrect={false}
+              value={this.state.password}
+              placeholder="password"
+              returnKeyType="send"
+              onChangeText={this.setPassword}
+              onSubmitEditing={this.register}
+              ref={ref => this.passwordInput = ref}
+              style={[compStyles.formInput, styles.input]}
+            />
+          </View>
+          <TouchableOpacity style={styles.btnPrimary} onPress={this.register}>
+            <Text style={styles.btnPrimaryText}>Register</Text>
+          </TouchableOpacity>
+          <View style={styles.footer}>
+            <Text>Already registered?</Text>
+            <TouchableOpacity style={styles.btnGray} onPress={() => {this.goTo('login')}}>
+              <Text style={styles.btnGrayText}>Login</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
       </MainTemplate>
     );
   }

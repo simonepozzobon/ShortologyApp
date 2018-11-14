@@ -9,7 +9,6 @@ import {
   View,
 } from 'react-native'
 
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { withNavigation } from 'react-navigation'
 import { MainTemplate } from '../presentation'
 import config from '../config'
@@ -80,50 +79,48 @@ class Login extends Component {
     // Component
     return (
       <MainTemplate title="Login">
-        <KeyboardAwareScrollView>
-          <View style={styles.content}>
-            <Image source={config.images.loginAuth} style={compStyles.image}></Image>
-            <View style={styles.formInput}>
-              <Text style={styles.inputLabel}>E-Mail</Text>
-              <TextInput
-                autoCorrect={false}
-                value={this.state.email}
-                placeholder="email@domain.com"
-                returnKeyType="next"
-                keyboardType="email-address"
-                onChangeText={this.emailSet}
-                onSubmitEditing={this.focusToPassword}
-                style={[compStyles.formInput, styles.input]}
-              />
-            </View>
-            <View style={styles.formInput}>
-              <Text style={styles.inputLabel}>Password</Text>
-              <TextInput
-                secureTextEntry
-                autoCorrect={false}
-                value={this.state.password}
-                placeholder="password"
-                returnKeyType="send"
-                onChangeText={this.passwordSet}
-                onSubmitEditing={this.attemptLogin}
-                ref={ref => this.passwordInput = ref}
-                style={[compStyles.formInput, styles.input]}
-              />
-            </View>
-            <TouchableOpacity
-              style={styles.btnPrimary}
-              onPress={this.attemptLogin}
-            >
-              <Text style={styles.btnPrimaryText}>Login</Text>
-            </TouchableOpacity>
-            <View style={styles.footer}>
-              <Text>Not registered yet?</Text>
-              <TouchableOpacity style={styles.btnGray} onPress={() => {this.goTo('register')}}>
-                <Text style={styles.btnGrayText}>Register</Text>
-              </TouchableOpacity>
-            </View>
+        <View style={styles.content}>
+          <Image source={config.images.loginAuth} style={compStyles.image}></Image>
+          <View style={styles.formInput}>
+            <Text style={styles.inputLabel}>E-Mail</Text>
+            <TextInput
+              autoCorrect={false}
+              value={this.state.email}
+              placeholder="email@domain.com"
+              returnKeyType="next"
+              keyboardType="email-address"
+              onChangeText={this.emailSet}
+              onSubmitEditing={this.focusToPassword}
+              style={[compStyles.formInput, styles.input]}
+            />
           </View>
-        </KeyboardAwareScrollView>
+          <View style={styles.formInput}>
+            <Text style={styles.inputLabel}>Password</Text>
+            <TextInput
+              secureTextEntry
+              autoCorrect={false}
+              value={this.state.password}
+              placeholder="password"
+              returnKeyType="send"
+              onChangeText={this.passwordSet}
+              onSubmitEditing={this.attemptLogin}
+              ref={ref => this.passwordInput = ref}
+              style={[compStyles.formInput, styles.input]}
+            />
+          </View>
+          <TouchableOpacity
+            style={styles.btnPrimary}
+            onPress={this.attemptLogin}
+          >
+            <Text style={styles.btnPrimaryText}>Login</Text>
+          </TouchableOpacity>
+          <View style={styles.footer}>
+            <Text>Not registered yet?</Text>
+            <TouchableOpacity style={styles.btnGray} onPress={() => {this.goTo('register')}}>
+              <Text style={styles.btnGrayText}>Register</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
       </MainTemplate>
     );
   }

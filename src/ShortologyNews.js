@@ -12,6 +12,7 @@ import {
   ItsFriday,
   ItsMonday,
   Login,
+  Profile,
   Register,
   SinglePost,
 } from './screens'
@@ -38,6 +39,11 @@ const MainStack = createSwitchNavigator({
     screen: SinglePost,
   },
 
+  // Profile
+  profile: {
+    screen: Profile,
+  },
+
   // Auth
   login: {
     screen: Login,
@@ -46,7 +52,7 @@ const MainStack = createSwitchNavigator({
     screen: Register,
   },
 }, {
-  initialRouteName: 'register',
+  initialRouteName: 'profile',
 })
 
 class ShortologyNews extends Component {

@@ -12,6 +12,7 @@ export default {
     // Commons
     logo: require('../../assets/commons/logo.png'),
     defaultAvatar: require('../../assets/commons/avatar.png'),
+    fakeAvatar: require('../../assets/dev/avatar.png'),
 
     // Home Screen
     itsMonday: require('../../assets/home/its-monday.png'),
