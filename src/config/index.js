@@ -49,5 +49,48 @@ export default {
   styleConst: {
     bgBlue: {},
     container: {},
+  },
+
+  avatar: {
+    head: [
+      { img: require('../../assets/avatar/heads/head_0.png') },
+      { img: require('../../assets/avatar/heads/head_1.png') },
+      { img: require('../../assets/avatar/heads/head_2.png') },
+      { img: require('../../assets/avatar/heads/head_3.png') },
+      { img: require('../../assets/avatar/heads/head_4.png') },
+      { img: require('../../assets/avatar/heads/head_5.png') },
+      { img: require('../../assets/avatar/heads/head_6.png') },
+      { img: require('../../assets/avatar/heads/head_7.png') },
+      { img: require('../../assets/avatar/heads/head_8.png') },
+      { img: require('../../assets/avatar/heads/head_9.png') },
+      { img: require('../../assets/avatar/heads/head_10.png') },
+      { img: require('../../assets/avatar/heads/head_11.png') },
+      { img: require('../../assets/avatar/heads/head_12.png') },
+      { img: require('../../assets/avatar/heads/head_13.png') },
+    ],
+    body: [
+      { img: require('../../assets/avatar/bodies/body_0.png') },
+      { img: require('../../assets/avatar/bodies/body_1.png') },
+      { img: require('../../assets/avatar/bodies/body_2.png') },
+      { img: require('../../assets/avatar/bodies/body_3.png') },
+      { img: require('../../assets/avatar/bodies/body_4.png') },
+      { img: require('../../assets/avatar/bodies/body_5.png') },
+      { img: require('../../assets/avatar/bodies/body_6.png') },
+      { img: require('../../assets/avatar/bodies/body_7.png') },
+      { img: require('../../assets/avatar/bodies/body_8.png') },
+      { img: require('../../assets/avatar/bodies/body_9.png') },
+    ],
+    leg: [
+      { img: require('../../assets/avatar/legs/leg_0.png') },
+      { img: require('../../assets/avatar/legs/leg_1.png') },
+      { img: require('../../assets/avatar/legs/leg_2.png') },
+      { img: require('../../assets/avatar/legs/leg_3.png') },
+      { img: require('../../assets/avatar/legs/leg_4.png') },
+      { img: require('../../assets/avatar/legs/leg_5.png') },
+      { img: require('../../assets/avatar/legs/leg_6.png') },
+      { img: require('../../assets/avatar/legs/leg_7.png') },
+      { img: require('../../assets/avatar/legs/leg_8.png') },
+      { img: require('../../assets/avatar/legs/leg_9.png') },
+    ],
   }
 }
