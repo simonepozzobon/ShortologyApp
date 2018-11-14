@@ -46,14 +46,7 @@ const MainStack = createSwitchNavigator({
     screen: Register,
   },
 }, {
-  initialRouteName: 'singlePost',
-  initialRouteParams: {
-    slug: 'ghost',
-    next: '',
-    prev: '',
-    length: 9,
-    idx: 0,
-  }
+  initialRouteName: 'login',
 })
 
 class ShortologyNews extends Component {
