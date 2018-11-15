@@ -35,12 +35,24 @@ class Header extends Component {
     if (this.props.title) {
       return (
         <View style={styles.header}>
-          <TouchableOpacity activeOpacity={itemOpacity} onPress={() => {this.goTo('home')}}>
-            <Image source={config.images.logo}  style={styles.headerImage}></Image>
+          <TouchableOpacity
+            activeOpacity={itemOpacity}
+            onPress={() => {this.goTo('home')}}
+          >
+            <Image
+              source={config.images.logo}
+              style={styles.headerImage}
+            />
           </TouchableOpacity>
           <Text style={styles.title}>{this.props.title}</Text>
-          <TouchableOpacity activeOpacity={itemOpacity} onPress={() => {this.goTo('login')}}>
-            <Image source={config.images.defaultAvatar}  style={styles.headerImage}></Image>
+          <TouchableOpacity
+            activeOpacity={itemOpacity}
+            onPress={() => {this.goTo('profile')}}
+          >
+            <Image
+              source={config.images.defaultAvatar}
+              style={styles.headerImage}
+            />
           </TouchableOpacity>
         </View>
       );

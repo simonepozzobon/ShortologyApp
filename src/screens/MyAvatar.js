@@ -25,7 +25,6 @@ class MyAvatar extends Component {
   }
 
   // Component State Management
-  componentWillMount() {}
   componentDidMount() {
     this.setState({isLoading: false})
   }
@@ -58,6 +57,7 @@ class MyAvatar extends Component {
       .then(response => {
         if (response.data.success) {
           this.props.navigation.navigate('myAvatarColor', {
+            imageId: response.data.id,
             imageUri: response.data.src
           })
         }

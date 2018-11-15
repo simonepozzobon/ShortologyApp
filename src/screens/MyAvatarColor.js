@@ -11,6 +11,7 @@ import {
 import { MainTemplate } from '../presentation'
 import { ColorPicker } from '../container'
 import config from '../config'
+import axios from 'axios'
 
 const colorsList = [
  '#f1f1e7',
@@ -35,8 +36,10 @@ class MyAvatarColor extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      isLoading: true,
+      imageId: props.navigation.state.params.imageId,
       imageUri: props.navigation.state.params.imageUri,
-      itemWidth: Dimensions.get('window').width * 0.6,
+      itemWidth: Dimensions.get('window').width * 0.5,
       color: '#f1f1e7',
     }
   }
@@ -50,9 +53,23 @@ class MyAvatarColor extends Component {
     this.setState({color: color})
   }
 
+  saveAvatar = () => {
+    let data = new FormData()
+    data.append('id', this.state.imageId)
+    data.append('color', this.state.color)
+
+    axios.post(config.api.path + '/app/avatars/add-background', data)
+      .then(response => {
+        console.log(response)
+        this.props.navigation.navigate('profile')
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+
   // Render
   render() {
-    console.log()
     // Dynamic styles
     const compStyles = StyleSheet.create({})
 
@@ -63,8 +80,9 @@ class MyAvatarColor extends Component {
         alignItems: 'center',
         backgroundColor: this.state.color,
         borderRadius: this.state.itemWidth,
-        padding: 20,
-        marginBottom: 40
+        padding: 40,
+        marginTop: 20,
+        marginBottom: 40,
        }}>
         <Image
           style={{
@@ -91,6 +109,7 @@ class MyAvatarColor extends Component {
         </View>
         <TouchableOpacity
           style={styles.btnPrimary}
+          onPress={this.saveAvatar}
         >
           <Text style={styles.btnPrimaryText}>Save</Text>
         </TouchableOpacity>

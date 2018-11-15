@@ -8,12 +8,13 @@ import {
   View,
 } from 'react-native'
 
+import { withNavigation } from 'react-navigation'
 import { MainTemplate } from '../presentation'
 import config from '../config'
 
 class Profile extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       screenWidth: Dimensions.get('window').width
     }
@@ -25,7 +26,7 @@ class Profile extends Component {
 
   // Methods
   goTo(route) {
-
+    this.props.navigation.navigate(route)
   }
 
   // Render
@@ -53,7 +54,10 @@ class Profile extends Component {
           <TouchableOpacity style={styles.btnText} onPress={() => {this.goTo('')}}>
             <Text style={styles.btnTextStyle}>Liked</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.btnText} onPress={() => {this.goTo('')}}>
+          <TouchableOpacity
+            style={styles.btnText}
+            onPress={() => {this.goTo('myAvatar')}}
+          >
             <Text style={styles.btnTextStyle}>My Avatar</Text>
           </TouchableOpacity>
         </View>
@@ -108,4 +112,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default Profile;
+export default withNavigation(Profile);

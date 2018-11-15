@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {
+  AsyncStorage,
   Dimensions,
   Image,
   StyleSheet,
@@ -12,6 +13,7 @@ import {
 import { withNavigation } from 'react-navigation'
 import { MainTemplate } from '../presentation'
 import config from '../config'
+import axios from 'axios'
 
 class Login extends Component {
   constructor() {
@@ -33,13 +35,34 @@ class Login extends Component {
     this.props.navigation.navigate(route)
   }
 
-  getMail() {}
-
-  getPassword() {}
-
   attemptLogin = () => {
     if (this.state.email && this.state.password) {
-      alert('attempt Login')
+      let data = new FormData()
+      data.append('email', this.state.email)
+      data.append('password', this.state.password)
+
+      axios.post(config.api.path + '/login', data)
+        .then(response => {
+          // user logged in
+          if (response.data.success) {
+
+            // Salva il token
+            AsyncStorage.setItem('token', response.data.token)
+
+            // Salva l'utente
+            const user = JSON.stringify(response.data.user)
+            AsyncStorage.setItem('user', user)
+
+            // Salva email
+            AsyncStorage.setItem('email', this.state.email)
+
+            // Salva password
+            AsyncStorage.setItem('password', this.state.password)
+
+          } else {
+            this.setState({password: ''})
+          }
+        })
     } else {
       alert('Fill the form')
     }

@@ -11,9 +11,11 @@ import { Header } from '../template'
 import config from '../config'
 
 class MainTemplate extends Component {
-  constructor() {
-    super()
-    this.state = {}
+  constructor(props) {
+    super(props)
+    this.state = {
+      header: props.hideHeader ? false : true
+    }
   }
 
   // Component State Management
@@ -45,13 +47,21 @@ class MainTemplate extends Component {
       )
     }
 
+    if (this.props.onlyBackground) {
+      content = this.props.children
+    }
+
+    const header = (
+      <View style={styles.header}>
+        <Header title={this.props.title} />
+      </View>
+    )
+
     // Component
     if (this.props.color == 2) {
       return (
         <LinearGradient colors={[config.colors.purple, config.colors.pink]} style={styles.background}>
-          <View style={styles.header}>
-            <Header title={this.props.title} />
-          </View>
+          {this.state.header ? header : null}
           {content}
         </LinearGradient>
       );
@@ -59,16 +69,8 @@ class MainTemplate extends Component {
 
     return (
       <LinearGradient colors={[config.colors.blue, config.colors.yellow]} style={styles.background}>
-        <View style={styles.header}>
-          <Header title={this.props.title} />
-        </View>
-        <KeyboardAwareScrollView>
-          <ScrollView contentContainerStyle={styles.container}>
-            <View style={styles.content}>
-              {this.props.children}
-            </View>
-          </ScrollView>
-        </KeyboardAwareScrollView>
+        {this.state.header ? header : null}
+        {content}
       </LinearGradient>
     );
   }

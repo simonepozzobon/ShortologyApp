@@ -1,3 +1,4 @@
+import AuthLoading from './AuthLoading'
 import HitParade from './HitParade'
 import Home from './Home'
 import ItsFriday from './ItsFriday'
@@ -10,6 +11,7 @@ import Register from './Register'
 import SinglePost from './SinglePost'
 
 export {
+  AuthLoading,
   HitParade,
   Home,
   ItsFriday,
