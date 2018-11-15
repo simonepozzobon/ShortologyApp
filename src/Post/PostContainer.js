@@ -33,8 +33,6 @@ class PostContainer extends Component {
       commentCount: props.post.comments ? props.post.comments.length : 0,
       screenWidth: Dimensions.get('window').width,
     }
-
-    console.log(this.state.comments)
   }
 
   // Component State Management
@@ -48,10 +46,10 @@ class PostContainer extends Component {
     }
   }
 
-  deleteComment = (id) => { 
+  deleteComment = (id) => {
     this.setState({
       commentCount: this.state.commentCount - 1,
-      comments: this.state.comments.filter(comment => comment.id !== id)
+      comments: this.state.comments.filter(comment => comment.id != id)
     })
   }
 
@@ -97,6 +95,7 @@ class PostContainer extends Component {
           <CommentArea
             id={this.props.post.id}
             updateComments={this.updateComments}
+            user={this.props.user}
             ref={x => this.CommentArea = x}
           />
         </ScrollView>

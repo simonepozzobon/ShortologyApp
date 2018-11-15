@@ -65,9 +65,7 @@ class CommentSingle extends Component {
   }
 
   _humanizeDate() {
-    // moment.locale(locale)
     return distanceInWordsToNow(this.props.comment.created_at)
-    // return 'moment rotto'
   }
 
   showActionSheet = () => {
@@ -80,7 +78,6 @@ class CommentSingle extends Component {
         const author_id = this.props.user.author.id
         const comment_id = this.props.comment.id
         const url = config.api.path + '/app/comments/destroy/' + author_id + '/' + comment_id
-
 
         axios.get(url).then(response => {
           if (response.data.success) {
@@ -97,6 +94,7 @@ class CommentSingle extends Component {
 
         case 1:
           // Report
+
           break
       }
     }

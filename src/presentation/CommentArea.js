@@ -13,7 +13,7 @@ class CommentArea extends Component {
       super(props)
       this.state = {
         replyTo: null,
-        author_id: 14, // per debug impostato sul mio
+        author_id: props.user.author.id, // per debug impostato sul mio
         comment: '',
       }
     }
@@ -52,7 +52,7 @@ class CommentArea extends Component {
         .then(response => {
           // clear comment area
           this.input.clear()
-          
+
           // aggiorna i commenti nel componenst SinglePost
           this.props.updateComments(response.data)
         })

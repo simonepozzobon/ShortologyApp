@@ -86,7 +86,7 @@ class PostInteractionNav extends Component {
             style={styles.btnIcon}
             resizeMode="contain"
           />
-          <Text style={styles.counter}>{this.state.commentCount}</Text>
+          <Text style={styles.counter}>{this.props.commentCount}</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
