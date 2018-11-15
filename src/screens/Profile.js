@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {
+  AsyncStorage,
   Dimensions,
   Image,
   StyleSheet,
@@ -16,17 +17,45 @@ class Profile extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      screenWidth: Dimensions.get('window').width
+      screenWidth: Dimensions.get('window').width,
+      username: '',
     }
   }
 
   // Component State Management
-  componentWillMount() {}
-  componentDidMount() {}
+  componentWillMount() {
+    AsyncStorage.getItem('user').then(userJson => {
+      const user = JSON.parse(userJson)
+      let capitalized = this.capitalizeFirstLetter(user.name)
+      this.setState({username: capitalized})
+    })
+  }
 
   // Methods
+  removeItemValue = async (key) => {
+    try {
+      await AsyncStorage.removeItem(key)
+    }
+    catch(err) {
+      return false
+    }
+  }
+
+  capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
   goTo(route) {
     this.props.navigation.navigate(route)
+  }
+
+  logout = () => {
+    console.log('LOGGED OUT')
+    this.removeItemValue('token')
+    this.removeItemValue('user')
+    this.removeItemValue('email')
+    this.removeItemValue('password')
+    this.props.navigation.navigate('Auth')
   }
 
   // Render
@@ -36,19 +65,19 @@ class Profile extends Component {
     const compStyles = StyleSheet.create({
       avatar: {
         width: md,
-        height: md
+        height: md,
       }
     })
 
     // Component
     return (
       <MainTemplate title="My Shortology">
-        <View>
+        <View style={{marginTop: 20}}>
           <Image
             style={compStyles.avatar}
             source={config.images.fakeAvatar}
           />
-          <Text style={styles.username}>Matteo Civaschi</Text>
+          <Text style={styles.username}>{this.state.username}</Text>
         </View>
         <View>
           <TouchableOpacity style={styles.btnText} onPress={() => {this.goTo('')}}>
@@ -62,7 +91,9 @@ class Profile extends Component {
           </TouchableOpacity>
         </View>
         <View>
-          <TouchableOpacity style={styles.btnGray} onPress={() => {this.goTo('')}}>
+          <TouchableOpacity
+            style={styles.btnGray}
+            onPress={this.logout}>
             <Text style={styles.btnGrayText}>Logout</Text>
           </TouchableOpacity>
         </View>
@@ -74,6 +105,7 @@ class Profile extends Component {
 
 const styles = StyleSheet.create({
   username: {
+    textAlign: 'center',
     fontFamily: 'Montserrat',
     fontWeight: 'bold',
     marginTop: 25,

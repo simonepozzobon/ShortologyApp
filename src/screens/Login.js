@@ -37,6 +37,7 @@ class Login extends Component {
 
   attemptLogin = () => {
     if (this.state.email && this.state.password) {
+      console.log('tentativo di login')
       let data = new FormData()
       data.append('email', this.state.email)
       data.append('password', this.state.password)
@@ -45,6 +46,7 @@ class Login extends Component {
         .then(response => {
           // user logged in
           if (response.data.success) {
+            console.log('login riuscito')
 
             // Salva il token
             AsyncStorage.setItem('token', response.data.token)
@@ -59,7 +61,9 @@ class Login extends Component {
             // Salva password
             AsyncStorage.setItem('password', this.state.password)
 
+            this.props.navigation.navigate('App')
           } else {
+            console.log('dati sbagliati')
             this.setState({password: ''})
           }
         })
@@ -101,7 +105,7 @@ class Login extends Component {
 
     // Component
     return (
-      <MainTemplate title="Login">
+      <MainTemplate title="Login" hideHeader={true}>
         <View style={styles.content}>
           <Image source={config.images.loginAuth} style={compStyles.image}></Image>
           <View style={styles.formInput}>
@@ -152,6 +156,7 @@ class Login extends Component {
 const styles = StyleSheet.create({
   content: {
     flex: 1,
+    marginTop: 75,
     justifyContent: 'center',
     alignItems: 'center',
     width: Dimensions.get('window').width,

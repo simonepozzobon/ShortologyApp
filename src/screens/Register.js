@@ -77,6 +77,7 @@ class Register extends Component {
     return (
       <MainTemplate
         title="Register"
+        hideHeader={true}
       >
         <View style={styles.content}>
           <View style={styles.formInput}>
@@ -138,7 +139,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 25,
+    marginTop: 75,
   },
   footer: {
     flex: 2,

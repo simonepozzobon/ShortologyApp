@@ -27,7 +27,6 @@ import config from '../config'
 class PostContainer extends Component {
   constructor(props) {
     super(props)
-
     this.state = {
       comments: props.post.comments,
       likeCount: props.post.likes ? props.post.likes.count : 0,
@@ -58,6 +57,7 @@ class PostContainer extends Component {
   render() {
     // Dynamic styles
     const compStyles = StyleSheet.create({})
+    console.log(this.props.post.slug.slug, this.state.comments)
 
     // Component
     return (

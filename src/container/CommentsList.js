@@ -45,7 +45,6 @@ class CommentsList extends Component {
         data={this.props.comments}
         keyExtractor={this.keyExtractor}
         renderItem={this.renderComment}
-        extraData={this.props.comments}
         style={{ flex: 1, alignSelf: 'stretch', marginHorizontal: 8 }}
       />
     )

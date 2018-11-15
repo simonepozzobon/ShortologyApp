@@ -62,6 +62,8 @@ const AppStack = createSwitchNavigator({
   myAvatarColor: {
     screen: MyAvatarColor,
   },
+}, {
+  initialRouteName: 'home',
 })
 
 const MainStack = createSwitchNavigator({
@@ -72,10 +74,6 @@ const MainStack = createSwitchNavigator({
 
 }, {
   initialRouteName: 'AuthLoading',
-  // initialRouteParams: {
-  //   imageId: '5becc180c4838',
-  //   imageUri: 'http://shortologynew.test:89/storage/avatars/export/5becc180c4838.png'
-  // }
 })
 
 class ShortologyNews extends Component {

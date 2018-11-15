@@ -22,6 +22,15 @@ class AuthLoading extends Component {
     this._bootstrapAsync()
   }
 
+  removeItemValue = async (key) => {
+    try {
+      await AsyncStorage.removeItem(key)
+    }
+    catch(err) {
+      return false
+    }
+  }
+
   _redirectAuthorized = () => {
     this.props.navigation.navigate('App')
   }
@@ -34,10 +43,13 @@ class AuthLoading extends Component {
     AsyncStorage.getItem('token').then((token) => {
       if (token) {
         // c'è un token e va validato
+        console.log('token valido')
         this._validateToken(token)
       }  else {
         // user non è loggato
-        this._redirectUnauthorized()
+        console.log('token NON valido')
+        // this._redirectUnauthorized()
+        this._reAuthenticateUser()
       }
     }).done()
   }
@@ -58,9 +70,18 @@ class AuthLoading extends Component {
   }
 
   _reAuthenticateUser = () => {
-    const email = AsyncStorage.getItem('email')
-    const password = AsyncStorage.getItem('password')
+    console.log('nuovo tentativo di autenticazione')
+    let email, password
+    AsyncStorage.getItem('email').then(value => {
+      email = value
+      AsyncStorage.getItem('password').then(value => {
+        password = value
+        this._attemptLogin(email, password)
+      })
+    })
+  }
 
+  _attemptLogin = (email, password) => {
     let data = new FormData()
     data.append('email', email)
     data.append('password', password)
@@ -68,28 +89,29 @@ class AuthLoading extends Component {
     axios.post(config.api.path + '/login', data).then(response => {
       // user logged in
       if (response.data.success) {
+        console.log('nuovo tentativo di autenticazione riuscito')
+        const user = JSON.stringify(response.data.user)
 
         // Salva il token
-        AsyncStorage.setItem('token', response.data.token)
-
-        // Salva l'utente
-        const user = JSON.stringify(response.data.user)
-        AsyncStorage.setItem('user', user)
-
-        // Salva email
-        AsyncStorage.setItem('email', this.state.email)
-
-        // Salva password
-        AsyncStorage.setItem('password', this.state.password)
-        this._redirectAuthorized()
+        AsyncStorage.setItem('token', response.data.token, () => {
+          // Salva l'utente
+          AsyncStorage.setItem('user', user, () => {
+            this._redirectAuthorized()
+          })
+        })
 
       } else {
         // se il login non funziona l'utente dovrà loggarsi di nuovo manualmente
-        this.removeItemValue('token')
-        this.removeItemValue('user')
-        this.removeItemValue('email')
-        this.removeItemValue('password')
-        this._redirectUnauthorized()
+        console.log('nuovo tentativo di autenticazione NON riuscito')
+        AsyncStorage.removeItem('token', () => {
+          AsyncStorage.removeItem('user', () => {
+            AsyncStorage.removeItem('email', () => {
+              AsyncStorage.removeItem('password', () => {
+                this._redirectUnauthorized()
+              })
+            })
+          })
+        })
       }
     })
   }
