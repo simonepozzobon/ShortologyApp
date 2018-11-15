@@ -13,6 +13,7 @@ import {
   ItsMonday,
   Login,
   MyAvatar,
+  MyAvatarColor,
   Profile,
   Register,
   SinglePost,
@@ -44,8 +45,11 @@ const MainStack = createSwitchNavigator({
   profile: {
     screen: Profile,
   },
-  myavatar: {
+  myAvatar: {
     screen: MyAvatar,
+  },
+  myAvatarColor: {
+    screen: MyAvatarColor,
   },
 
   // Auth
@@ -56,7 +60,10 @@ const MainStack = createSwitchNavigator({
     screen: Register,
   },
 }, {
-  initialRouteName: 'myavatar',
+  initialRouteName: 'myAvatarColor',
+  initialRouteParams: {
+    imageUri: 'http://shortologynew.test:89/storage/avatars/export/5becc180c4838.png'
+  }
 })
 
 class ShortologyNews extends Component {

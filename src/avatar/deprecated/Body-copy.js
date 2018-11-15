@@ -9,10 +9,11 @@ import {
 
 import config from '../config'
 import Carousel from 'react-native-snap-carousel'
+import Swiper from 'react-native-swiper'
 
 class Body extends Component {
-  constructor(props) {
-    super(props)
+  constructor() {
+    super()
     this.state = {
       screenWidth: Dimensions.get('window').width * .6
     }
@@ -23,10 +24,6 @@ class Body extends Component {
   componentDidMount() {}
 
   // Methods
-  setBody = (index) => {
-    this.props.setBody(index)
-  }
-
   renderItem = (data, index) => {
     return (
       <View>
@@ -49,6 +46,9 @@ class Body extends Component {
     // Dynamic styles
     const compStyles = StyleSheet.create({})
 
+    // const nextButton = <Text style={styles.buttonText}>›</Text>
+    // const prevButton = <Text style={styles.buttonText}>‹</Text>
+
     // Component
     return (
       <View style={{ flex: 1, justifyContent: 'center',  alignItems: 'center' }}>
@@ -57,10 +57,36 @@ class Body extends Component {
           renderItem={this.renderItem}
           sliderWidth={this.state.screenWidth}
           itemWidth={this.state.screenWidth}
-          onSnapToItem={this.setBody}
         />
       </View>
     );
+    // return (
+    //   <View style={{ marginHorizontal: 40 }}>
+    //     <Swiper
+    //       showsButtons={true}
+    //       showsPagination={false}
+    //       automaticallyAdjustContentInsets={true}
+    //       width={this.state.screenWidth}
+    //       height={this.state.screenWidth}
+    //       nextButton={nextButton}
+    //       prevButton={prevButton}
+    //       buttonWrapperStyle={styles.buttonWrapperStyle}
+    //     >
+    //       {config.avatar.body.map((item, index) => {
+    //         return (
+    //             <Image
+    //               style={{
+    //                 width: this.state.screenWidth,
+    //                 height: this.state.screenWidth,
+    //                 resizeMode: 'contain'
+    //               }}
+    //               source={item.img}
+    //             />
+    //         )
+    //       })}
+    //     </Swiper>
+    //   </View>
+    // )
   }
 }
 

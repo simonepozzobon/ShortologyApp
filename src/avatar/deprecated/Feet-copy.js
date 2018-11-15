@@ -12,8 +12,8 @@ import Carousel from 'react-native-snap-carousel'
 import Swiper from 'react-native-swiper'
 
 class Feet extends Component {
-  constructor(props) {
-    super(props)
+  constructor() {
+    super()
     this.state = {
       screenWidth: Dimensions.get('window').width * .5
     }
@@ -24,10 +24,6 @@ class Feet extends Component {
   componentDidMount() {}
 
   // Methods
-  setLeg = (index) => {
-    this.props.setLeg(index)
-  }
-
   renderItem = (data, index) => {
     return (
       <View>
@@ -48,18 +44,47 @@ class Feet extends Component {
     // Dynamic styles
     const compStyles = StyleSheet.create({})
 
+    const nextButton = <Text style={styles.buttonText}>›</Text>
+    const prevButton = <Text style={styles.buttonText}>‹</Text>
+
     // Component
+    // return (
+    //   <View style={{ flex: 1, justifyContent: 'center',  alignItems: 'center' }}>
+    //     <Carousel
+    //       data={config.avatar.leg}
+    //       renderItem={this.renderItem}
+    //       sliderWidth={this.state.screenWidth}
+    //       itemWidth={this.state.screenWidth}
+    //     />
+    //   </View>
+    // );
     return (
-      <View style={{ flex: 1, justifyContent: 'center',  alignItems: 'center' }}>
-        <Carousel
-          data={config.avatar.leg}
-          renderItem={this.renderItem}
-          sliderWidth={this.state.screenWidth}
-          itemWidth={this.state.screenWidth}
-          onSnapToItem={this.setLeg}
-        />
+      <View style={{ marginHorizontal: 40 }}>
+        <Swiper
+          showsButtons={true}
+          showsPagination={false}
+          automaticallyAdjustContentInsets={true}
+          width={this.state.screenWidth}
+          height={this.state.screenWidth}
+          nextButton={nextButton}
+          prevButton={prevButton}
+          buttonWrapperStyle={styles.buttonWrapperStyle}
+        >
+          {config.avatar.leg.map((item, index) => {
+            return (
+                <Image
+                  style={{
+                    width: this.state.screenWidth,
+                    height: this.state.screenWidth,
+                    resizeMode: 'contain'
+                  }}
+                  source={item.img}
+                />
+            )
+          })}
+        </Swiper>
       </View>
-    );
+    )
   }
 }
 
