@@ -57,7 +57,13 @@ class PostContainer extends Component {
   render() {
     // Dynamic styles
     const compStyles = StyleSheet.create({})
-    console.log(this.props.post.slug.slug, this.state.comments)
+
+    let commentList = (
+      <CommentsList
+        comments={this.state.comments}
+        focusComment={this.focusComment}
+      />
+    )
 
     // Component
     return (
@@ -76,10 +82,7 @@ class PostContainer extends Component {
             commentCount={this.state.commentCount}
             focusComment={this.focusComment}
           />
-          <CommentsList
-            comments={this.state.comments}
-            focusComment={this.focusComment}
-          />
+          {this.state.comments.length > 0 ? commentList : null}
           <CommentArea
             id={this.props.post.id}
             updateComments={this.updateComments}

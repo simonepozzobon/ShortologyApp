@@ -63,7 +63,7 @@ const AppStack = createSwitchNavigator({
     screen: MyAvatarColor,
   },
 }, {
-  initialRouteName: 'hitParade',
+  initialRouteName: 'home',
 })
 
 const MainStack = createSwitchNavigator({

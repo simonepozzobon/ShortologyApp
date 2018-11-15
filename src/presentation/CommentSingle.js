@@ -12,7 +12,12 @@ import { NativeModules } from 'react-native'
 import ActionSheet from 'react-native-actionsheet'
 import SvgUri from 'react-native-svg-uri'
 import config from '../config'
-import moment from 'moment'
+// import moment from 'moment'
+// import 'moment/min/moment-with-locales'
+// const moment = require('moment/min/moment-with-locales')
+const distanceInWordsToNow = require('date-fns/distance_in_words_to_now')
+
+
 import { connect } from 'react-redux'
 
 // Set locale based on platform
@@ -29,6 +34,7 @@ class CommentSingle extends Component {
     this.state = {
       id: this.props.comment.id
     }
+    console.log(props)
   }
 
   // Component State Management
@@ -42,8 +48,9 @@ class CommentSingle extends Component {
   }
 
   _humanizeDate() {
-    moment.locale(locale)
-    return moment(this.props.comment.created_at).fromNow()
+    // moment.locale(locale)
+    return distanceInWordsToNow(this.props.comment.created_at)
+    // return 'moment rotto'
   }
 
   showActionSheet = () => {

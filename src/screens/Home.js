@@ -54,7 +54,7 @@ class Home extends Component {
 
     // Component
     return (
-      <MainTemplate>
+      <MainTemplate title=" ">
         <TouchableOpacity activeOpacity={itemOpacity} onPress={() => {this.goTo('itsMonday')}}>
           <Image source={config.images.itsMonday} style={compStyles.menuItem}></Image>
         </TouchableOpacity>

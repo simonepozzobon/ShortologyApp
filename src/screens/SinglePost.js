@@ -42,7 +42,7 @@ class SinglePost extends Component {
     return fetch(config.api.path + '/app/single-post/' + this.props.navigation.state.params.slug)
       .then(response => response.json())
       .then(responseJson => {
-        console.log(responseJson)
+        // console.log(responseJson)
         this.setState({
           isLoading: false,
           posts: responseJson.posts,
