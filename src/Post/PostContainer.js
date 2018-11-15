@@ -31,8 +31,10 @@ class PostContainer extends Component {
       comments: props.post.comments,
       likeCount: props.post.likes ? props.post.likes.count : 0,
       commentCount: props.post.comments ? props.post.comments.length : 0,
-      screenWidth: Dimensions.get('window').width
+      screenWidth: Dimensions.get('window').width,
     }
+
+    console.log(this.state.comments)
   }
 
   // Component State Management
@@ -44,6 +46,13 @@ class PostContainer extends Component {
     } else {
       this.CommentArea.focus()
     }
+  }
+
+  deleteComment = (id) => { 
+    this.setState({
+      commentCount: this.state.commentCount - 1,
+      comments: this.state.comments.filter(comment => comment.id !== id)
+    })
   }
 
   updateComments = (newComment) => {
@@ -62,6 +71,8 @@ class PostContainer extends Component {
       <CommentsList
         comments={this.state.comments}
         focusComment={this.focusComment}
+        deleteComment={this.deleteComment}
+        user={this.props.user}
       />
     )
 

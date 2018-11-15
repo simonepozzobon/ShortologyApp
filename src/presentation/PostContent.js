@@ -36,7 +36,14 @@ class PostContent extends Component {
     })
 
     // Component
-    let content
+    let content = (
+      <Image
+        source={{ uri: this.props.post.full_img }}
+        style={compStyles.postImage}
+        resizeMode="contain"
+      />
+    )
+
     if (this.props.post.isvideo) {
       // Contenuto Video
       content = (
@@ -53,16 +60,8 @@ class PostContent extends Component {
           />
         </View>
       )
-    } else {
-      // Contenuto Immagine
-      content = (
-        <Image
-          source={{ uri: this.props.post.full_img }}
-          style={compStyles.postImage}
-          resizeMode="contain"
-        />
-      )
     }
+    
     return (
       <View style={[styles.contentContainer]}>
         {content}

@@ -26,12 +26,23 @@ class CommentsList extends Component {
     this.props.focusComment(id)
   }
 
+  deleteComment = (id) => {
+    this.props.deleteComment(id)
+  }
+
   keyExtractor = (item, index) => {
     return index.toString()
   }
 
   renderComment = (data) => {
-    return <CommentSingle comment={data.item} focusComment={ this.focusComment }/>
+    return (
+      <CommentSingle
+        comment={data.item}
+        focusComment={this.focusComment}
+        deleteComment={this.deleteComment}
+        user={this.props.user}
+      />
+    )
   }
 
   // Render

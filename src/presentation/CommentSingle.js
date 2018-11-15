@@ -12,9 +12,11 @@ import { NativeModules } from 'react-native'
 import ActionSheet from 'react-native-actionsheet'
 import SvgUri from 'react-native-svg-uri'
 import config from '../config'
+import axios from 'axios'
 // import moment from 'moment'
 // import 'moment/min/moment-with-locales'
 // const moment = require('moment/min/moment-with-locales')
+
 const distanceInWordsToNow = require('date-fns/distance_in_words_to_now')
 
 
@@ -32,13 +34,28 @@ class CommentSingle extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      id: this.props.comment.id
+      id: this.props.comment.id,
+      actionOpts: ['Reply', 'Report', 'cancel'],
+      deleteIdx: 0,
+      cancelIdx: 2,
+      isAuthor: false,
     }
-    console.log(props)
   }
 
   // Component State Management
-  componentWillMount() {}
+  componentWillMount() {
+
+    if (this.props.user.author.id == this.props.comment.author_id) {
+      this.setState({
+        actionOpts: ['Delete', 'cancel'],
+        deleteIdx: 0,
+        cancelIdx: 1,
+        isAuthor: true,
+      })
+    }
+
+
+  }
   componentDidMount() {}
 
   // Methods
@@ -58,19 +75,30 @@ class CommentSingle extends Component {
   }
 
   actionSheetPress = (index) => {
-    switch (index) {
-      case 0:
-        // Reply
-        this.props.focusComment(this.state.id)
-        break
+    if (this.state.isAuthor) {
+      if (index == 0) {
+        const author_id = this.props.user.author.id
+        const comment_id = this.props.comment.id
+        const url = config.api.path + '/app/comments/destroy/' + author_id + '/' + comment_id
 
-      case 1:
-        // Report
-        break
 
-      case 2:
-        // Cancel
-        break
+        axios.get(url).then(response => {
+          if (response.data.success) {
+            this.props.deleteComment(response.data.deleted)
+          }
+        })
+      }
+    } else {
+      switch (index) {
+        case 0:
+          // Reply
+          this.props.focusComment(this.state.id)
+          break
+
+        case 1:
+          // Report
+          break
+      }
     }
   }
 
@@ -107,9 +135,9 @@ class CommentSingle extends Component {
             </TouchableOpacity>
             <ActionSheet
               ref={o => this.ActionSheet = o}
-              options={['Reply', 'Report', 'cancel']}
-              cancelButtonIndex={2}
-              destructiveButtonIndex={1}
+              options={this.state.actionOpts}
+              cancelButtonIndex={this.state.cancelIdx}
+              destructiveButtonIndex={this.state.deleteIdx}
               onPress={this.actionSheetPress}
             />
           </View>

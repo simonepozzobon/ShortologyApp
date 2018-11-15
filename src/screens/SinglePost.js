@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {
   ActivityIndicator,
+  AsyncStorage,
   Dimensions,
   FlatList,
   Image,
@@ -32,6 +33,7 @@ class SinglePost extends Component {
       posts: [],
       firstItem: 0,
       screenWidth: Dimensions.get('window').width,
+      user: {},
     }
   }
 
@@ -44,9 +46,15 @@ class SinglePost extends Component {
       .then(responseJson => {
         // console.log(responseJson)
         this.setState({
-          isLoading: false,
           posts: responseJson.posts,
           firstItem: responseJson.idx
+        })
+
+        AsyncStorage.getItem('user').then(user => {
+          this.setState({
+            isLoading: false,
+            user: JSON.parse(user)
+          })
         })
       })
       .catch((error) => {
@@ -60,14 +68,13 @@ class SinglePost extends Component {
     return (
       <PostContainer
         post={data.item}
+        user={this.state.user}
       />
     )
   }
 
   // Render
   render() {
-    // Dynamic styles
-
     // Caricamento
     if (this.state.isLoading) {
       return (
