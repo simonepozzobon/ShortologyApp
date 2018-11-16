@@ -19,9 +19,6 @@ import axios from 'axios'
 
 const distanceInWordsToNow = require('date-fns/distance_in_words_to_now')
 
-
-import { connect } from 'react-redux'
-
 // Set locale based on platform
 let locale = 'en_US'
 if (Platform.OS === 'ios') {
@@ -40,6 +37,8 @@ class CommentSingle extends Component {
       cancelIdx: 2,
       isAuthor: false,
     }
+
+    console.log(props)
   }
 
   // Component State Management
@@ -106,10 +105,14 @@ class CommentSingle extends Component {
     const compStyles = StyleSheet.create({})
 
     // Component
+    let classes = [styles.commentSingle, styles.shadows]
+    if (this.props.comment.type == 'reply') {
+      classes = [styles.commentReply, styles.shadows]
+    }
 
     // Comment
     return (
-      <View style={[styles.commentSingle, styles.shadows]}>
+      <View style={classes}>
         <View style={styles.avatar}>
           <SvgUri
             width="50"
@@ -155,6 +158,16 @@ const styles = StyleSheet.create({
     borderRadius: 14,
     padding: 10,
     marginBottom: 20,
+    backgroundColor: 'white',
+  },
+
+  commentReply: {
+    flexDirection: 'row',
+    alignSelf: 'stretch',
+    borderRadius: 14,
+    padding: 10,
+    marginBottom: 20,
+    marginLeft: 16,
     backgroundColor: 'white',
   },
 
