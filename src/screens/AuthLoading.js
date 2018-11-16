@@ -60,8 +60,9 @@ class AuthLoading extends Component {
 
       // formatta la risposta e la salva nel dispositivo
       const user = JSON.stringify(response.data)
-      AsyncStorage.setItem('user', user)
-      this._redirectAuthorized()
+      AsyncStorage.setItem('user', user).then(() => {
+        this._redirectAuthorized()
+      })
 
     }).catch(err => {
       // se non riesce a recuperare l'utente prova ad autenticarlo di nuovo

@@ -82,9 +82,7 @@ const MainStack = createSwitchNavigator({
 class ShortologyNews extends Component {
   constructor() {
     super()
-    this.state = {
-      myKey: 'gianni'
-    }
+    this.state = {}
   }
 
   componentWillMount() {
