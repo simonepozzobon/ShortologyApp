@@ -27,8 +27,7 @@ class AuthLoading extends Component {
       screenWidth: Dimensions.get('window').width
     }
 
-    // this._bootstrapAsync()
-    this._attemptLogin('info@simonepozzobon.com', 'password')
+    this._bootstrapAsync()
   }
 
   removeItemValue = async (key) => {
