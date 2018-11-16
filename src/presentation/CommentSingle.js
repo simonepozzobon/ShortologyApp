@@ -33,12 +33,10 @@ class CommentSingle extends Component {
     this.state = {
       id: this.props.comment.id,
       actionOpts: ['Reply', 'Report', 'cancel'],
-      deleteIdx: 0,
+      deleteIdx: 1,
       cancelIdx: 2,
       isAuthor: false,
     }
-
-    console.log(props)
   }
 
   // Component State Management
@@ -93,7 +91,15 @@ class CommentSingle extends Component {
 
         case 1:
           // Report
-
+          const baseUrl = config.api.path + '/app/comments/report/'
+          const author_id = this.props.user.author.id
+          const comment_id = this.props.comment.id
+          console.log(baseUrl + author_id + '/' + comment_id)
+          axios.get(baseUrl + author_id + '/' + comment_id).then(response => {
+            if (response.data.success) {
+              alert('comment reported')
+            }
+          })
           break
       }
     }
