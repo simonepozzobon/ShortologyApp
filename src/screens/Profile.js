@@ -102,7 +102,7 @@ class Profile extends Component {
           <Text style={styles.username}>{this.state.username}</Text>
         </View>
         <View>
-          <TouchableOpacity style={styles.btnText} onPress={() => {this.goTo('')}}>
+          <TouchableOpacity style={styles.btnText} onPress={() => {this.goTo('userFavourited')}}>
             <Text style={styles.btnTextStyle}>Liked</Text>
           </TouchableOpacity>
           <TouchableOpacity

@@ -1,4 +1,5 @@
 import AuthLoading from './AuthLoading'
+import ConfirmEmail from './ConfirmEmail'
 import HitParade from './HitParade'
 import Home from './Home'
 import ItsFriday from './ItsFriday'
@@ -13,6 +14,7 @@ import UserFavourited from './UserFavourited'
 
 export {
   AuthLoading,
+  ConfirmEmail,
   HitParade,
   Home,
   ItsFriday,

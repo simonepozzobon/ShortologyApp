@@ -11,6 +11,7 @@ import {
 import { withNavigation } from 'react-navigation'
 import { MainTemplate } from '../presentation'
 import config from '../config'
+import axios from 'axios'
 
 class Register extends Component {
   constructor() {
@@ -55,7 +56,17 @@ class Register extends Component {
 
   register = () => {
     if (this.state.name && this.state.email && this.state.password) {
-      alert('attempt Register')
+      let data = new FormData()
+      data.append('name', this.state.name)
+      data.append('email', this.state.email)
+      data.append('password', this.state.password)
+
+      axios.post(config.api.path + '/register', data).then(response => {
+        console.log(response)
+        if (response.data.success) {
+          this.props.navigation.navigate('confirmEmail')
+        }
+      })
     } else {
       alert('Fill the form')
     }

@@ -9,6 +9,7 @@ import { createSwitchNavigator, createStackNavigator } from 'react-navigation'
 // Screens
 import {
   AuthLoading,
+  ConfirmEmail,
   HitParade,
   Home,
   ItsFriday,
@@ -30,6 +31,11 @@ const AuthStack = createSwitchNavigator({
   register: {
     screen: Register,
   },
+  confirmEmail: {
+    screen: ConfirmEmail,
+  },
+}, {
+  initialRouteName: 'login'
 })
 
 const AppStack = createSwitchNavigator({
