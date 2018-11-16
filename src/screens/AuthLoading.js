@@ -27,7 +27,8 @@ class AuthLoading extends Component {
       screenWidth: Dimensions.get('window').width
     }
 
-    this._bootstrapAsync()
+    // this._bootstrapAsync()
+    this._attemptLogin('info@simonepozzobon.com', 'password')
   }
 
   removeItemValue = async (key) => {
@@ -73,6 +74,7 @@ class AuthLoading extends Component {
 
     }).catch(err => {
       // se non riesce a recuperare l'utente prova ad autenticarlo di nuovo
+      console.log(err)
       this._reAuthenticateUser()
     })
   }

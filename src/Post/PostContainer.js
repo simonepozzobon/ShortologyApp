@@ -90,6 +90,7 @@ class PostContainer extends Component {
             likeCount={this.state.likeCount}
             commentCount={this.state.commentCount}
             focusComment={this.focusComment}
+            user={this.props.user}
           />
           {this.state.comments.length > 0 ? commentList : null}
           <CommentArea

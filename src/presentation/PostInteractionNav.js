@@ -15,6 +15,7 @@ class PostInteractionNav extends Component {
     this.state = {
       likeCount: 0,
       commentCount: 0,
+      user: props.user
     }
   }
 
@@ -30,7 +31,7 @@ class PostInteractionNav extends Component {
   // Methods
   likePost = () => {
     console.log('path per api', config.api.path + '/app/' + this.props.id + '/like-it')
-    fetch(config.api.path + '/app/' + this.props.id + '/like-it')
+    fetch(config.api.path + '/app/' + this.state.user.author.id + '/' + this.props.id + '/like-it')
       .then(response => response.json())
       .then(responseJson => {
         if (responseJson.success) {

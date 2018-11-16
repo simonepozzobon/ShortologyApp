@@ -1,6 +1,7 @@
 import ColorSelector from './ColorSelector'
 import CommentArea from './CommentArea'
 import CommentSingle from './CommentSingle'
+import FavouritedSingle from './FavouritedSingle'
 import HitParadeSingle from './HitParadeSingle'
 import MainTemplate from './MainTemplate'
 import PostContent from './PostContent'
@@ -11,6 +12,7 @@ export {
   ColorSelector,
   CommentArea,
   CommentSingle,
+  FavouritedSingle,
   HitParadeSingle,
   MainTemplate,
   PostContent,

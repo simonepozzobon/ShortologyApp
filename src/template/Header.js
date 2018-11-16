@@ -28,8 +28,6 @@ class Header extends Component {
         avatar: user.avatar.url,
         avatarType: user.avatar.type ? user.avatar.type : 'svg',
       })
-
-      console.log(user.avatar.url, user.avatar.type)
     })
   }
 

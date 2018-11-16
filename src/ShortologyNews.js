@@ -19,6 +19,7 @@ import {
   Profile,
   Register,
   SinglePost,
+  UserFavourited,
 } from './screens'
 
 // Navigation - Router
@@ -46,11 +47,15 @@ const AppStack = createSwitchNavigator({
   hitParade: {
     screen: HitParade,
   },
+  userFavourited: {
+    screen: UserFavourited
+  },
 
   // Post Single
   singlePost: {
     screen: SinglePost,
   },
+
 
   // Profile
   profile: {
@@ -63,10 +68,7 @@ const AppStack = createSwitchNavigator({
     screen: MyAvatarColor,
   },
 }, {
-  initialRouteName: 'singlePost',
-  initialRouteParams: {
-    slug: 'baloon'
-  }
+  initialRouteName: 'home',
 })
 
 const MainStack = createSwitchNavigator({

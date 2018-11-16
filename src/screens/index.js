@@ -9,6 +9,7 @@ import MyAvatarColor from './MyAvatarColor'
 import Profile from './Profile'
 import Register from './Register'
 import SinglePost from './SinglePost'
+import UserFavourited from './UserFavourited'
 
 export {
   AuthLoading,
@@ -22,4 +23,5 @@ export {
   Profile,
   Register,
   SinglePost,
+  UserFavourited,
 }
