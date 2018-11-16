@@ -48,6 +48,7 @@ class CommentSingle extends Component {
         deleteIdx: 0,
         cancelIdx: 1,
         isAuthor: true,
+        avatarType: 'svg'
       })
     }
 
@@ -94,7 +95,6 @@ class CommentSingle extends Component {
           const baseUrl = config.api.path + '/app/comments/report/'
           const author_id = this.props.user.author.id
           const comment_id = this.props.comment.id
-          console.log(baseUrl + author_id + '/' + comment_id)
           axios.get(baseUrl + author_id + '/' + comment_id).then(response => {
             if (response.data.success) {
               alert('comment reported')
@@ -116,15 +116,31 @@ class CommentSingle extends Component {
       classes = [styles.commentReply, styles.shadows]
     }
 
+    let avatar = (
+        <SvgUri
+          width="50"
+          height="50"
+          source={{ uri: this.props.comment.author.avatar_url }}
+        />
+    )
+
+    if (this.props.comment.author.avatar_type == 'image') {
+      avatar = (
+        <Image
+          style={{
+            width: 50,
+            height: 50,
+          }}
+          source={{ uri: this.props.comment.author.avatar_url }}
+        />
+      )
+    }
+
     // Comment
     return (
       <View style={classes}>
         <View style={styles.avatar}>
-          <SvgUri
-            width="50"
-            height="50"
-            source={{ uri: this.props.comment.author.avatar_url }}
-          />
+          {avatar}
         </View>
         <View style={styles.content}>
           <View style={styles.topInfo}>

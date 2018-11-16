@@ -64,9 +64,9 @@ class AuthLoading extends Component {
   _validateToken = (token) => {
     axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
     axios.get(config.api.path + '/app/user').then(response => {
-
       // formatta la risposta e la salva nel dispositivo
       const user = JSON.stringify(response.data)
+
       AsyncStorage.setItem('user', user).then(() => {
         this._redirectAuthorized()
       })
@@ -91,7 +91,7 @@ class AuthLoading extends Component {
     data.append('email', email)
     data.append('password', password)
 
-    axios.post(config.api.path + '/login', data).then(response => {
+    axios.post(config.api.path + '/login-mobile', data).then(response => {
       // user logged in
       if (response.data.success) {
         console.log('nuovo tentativo di autenticazione riuscito')

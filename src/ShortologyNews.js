@@ -63,10 +63,10 @@ const AppStack = createSwitchNavigator({
     screen: MyAvatarColor,
   },
 }, {
-  initialRouteName: 'profile',
-  // initialRouteParams: {
-  //   slug: 'baloon'
-  // }
+  initialRouteName: 'singlePost',
+  initialRouteParams: {
+    slug: 'baloon'
+  }
 })
 
 const MainStack = createSwitchNavigator({

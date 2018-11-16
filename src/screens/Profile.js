@@ -21,7 +21,8 @@ class Profile extends Component {
       screenWidth: Dimensions.get('window').width,
       username: '',
       avatar: null,
-      avatarType: 'image'
+      avatarType: 'image',
+      user: {}
     }
   }
 
@@ -35,7 +36,8 @@ class Profile extends Component {
       this.setState({
         username: capitalized,
         avatar: user.avatar.url,
-        avatarType: 'svg',
+        avatarType: user.avatar.type ? user.avatar.type : 'svg',
+        user: user,
       })
     })
   }
@@ -46,7 +48,7 @@ class Profile extends Component {
   }
 
   goTo(route) {
-    this.props.navigation.navigate(route)
+      this.props.navigation.navigate(route)
   }
 
   logout = () => {

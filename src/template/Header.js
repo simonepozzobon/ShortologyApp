@@ -26,8 +26,10 @@ class Header extends Component {
       const user = JSON.parse(userJson)
       this.setState({
         avatar: user.avatar.url,
-        avatarType: 'svg',
+        avatarType: user.avatar.type ? user.avatar.type : 'svg',
       })
+
+      console.log(user.avatar.url, user.avatar.type)
     })
   }
 
@@ -62,8 +64,8 @@ class Header extends Component {
     } else if (this.state.avatar) {
       avatar = (
         <Image
-          style={compStyles.avatar}
-          source={{uri: this.state.avatar}}
+          style={styles.headerImageAv}
+          source={{ uri: this.state.avatar }}
         />
       )
     }
@@ -127,8 +129,17 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
 
+  headerImageAv: {
+    marginTop: 35,
+    width: 50,
+    height: 50,
+    marginRight: 5,
+    resizeMode: 'contain',
+  },
+
   svgHeader: {
     marginTop: 35,
+    marginRight: 5,
     resizeMode: 'contain',
   }
 })

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {
+  AsyncStorage,
   Dimensions,
   Image,
   StyleSheet,
@@ -41,11 +42,17 @@ class MyAvatarColor extends Component {
       imageUri: props.navigation.state.params.imageUri,
       itemWidth: Dimensions.get('window').width * 0.5,
       color: '#f1f1e7',
+      author_id: 0,
     }
   }
 
   // Component State Management
-  componentWillMount() {}
+  componentWillMount() {
+    AsyncStorage.getItem('user').then(userJson => {
+      const user = JSON.parse(userJson)
+      this.setState({ author_id: user.author.id })
+    })
+  }
   componentDidMount() {}
 
   // Methods
@@ -57,11 +64,15 @@ class MyAvatarColor extends Component {
     let data = new FormData()
     data.append('id', this.state.imageId)
     data.append('color', this.state.color)
-
+    data.append('author_id', this.state.author_id)
+    console.log(this.state.imageId, this.state.color, this.state.author_id)
     axios.post(config.api.path + '/app/avatars/add-background', data)
       .then(response => {
         console.log(response)
-        this.props.navigation.navigate('profile')
+        const user = JSON.stringify(response.data.user)
+        AsyncStorage.setItem('user', user).then(() => {
+          this.props.navigation.navigate('profile')
+        })
       })
       .catch(err => {
         console.log(err)
