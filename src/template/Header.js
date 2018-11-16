@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {
+  AsyncStorage,
   Image,
   StyleSheet,
   Text,
@@ -7,16 +8,27 @@ import {
   View,
 } from 'react-native'
 import { withNavigation } from 'react-navigation'
+import SvgUri from 'react-native-svg-uri'
 import config from '../config'
 
 class Header extends Component {
   constructor() {
     super()
-    this.state = {}
+    this.state = {
+      avatar: null,
+      avatarType: 'image'
+    }
   }
 
   // Component State Management
-  componentDidMount() {
+  componentWillMount() {
+    AsyncStorage.getItem('user').then(userJson => {
+      const user = JSON.parse(userJson)
+      this.setState({
+        avatar: user.avatar.url,
+        avatarType: 'svg',
+      })
+    })
   }
 
   // Methods
@@ -30,6 +42,31 @@ class Header extends Component {
     const compStyles = StyleSheet.create({})
 
     const itemOpacity = 0.7
+
+    let avatar = (
+      <Image
+        source={config.images.defaultAvatar}
+        style={styles.headerImage}
+      />
+    )
+
+    if (this.state.avatar && this.state.avatarType == 'svg') {
+      avatar = (
+        <SvgUri
+          width={45}
+          height={45}
+          source={{ uri: this.state.avatar }}
+          style={styles.svgHeader}
+        />
+      )
+    } else if (this.state.avatar) {
+      avatar = (
+        <Image
+          style={compStyles.avatar}
+          source={{uri: this.state.avatar}}
+        />
+      )
+    }
 
     // Component
     if (this.props.title) {
@@ -49,10 +86,7 @@ class Header extends Component {
             activeOpacity={itemOpacity}
             onPress={() => {this.goTo('profile')}}
           >
-            <Image
-              source={config.images.defaultAvatar}
-              style={styles.headerImage}
-            />
+            {avatar}
           </TouchableOpacity>
         </View>
       );
@@ -63,9 +97,7 @@ class Header extends Component {
         <TouchableOpacity activeOpacity={itemOpacity} onPress={() => {this.goTo('home')}}>
           <Image source={config.images.logo}  style={styles.headerImage}></Image>
         </TouchableOpacity>
-        <TouchableOpacity activeOpacity={itemOpacity} onPress={() => {this.goTo('login')}}>
-          <Image source={config.images.defaultAvatar}  style={styles.headerImage}></Image>
-        </TouchableOpacity>
+        {avatar}
       </View>
     );
   }
@@ -87,12 +119,18 @@ const styles = StyleSheet.create({
     marginTop: 35,
     fontSize: 18,
   },
+
   headerImage: {
     marginTop: 35,
     width: 75,
     height: 75,
     resizeMode: 'contain',
   },
+
+  svgHeader: {
+    marginTop: 35,
+    resizeMode: 'contain',
+  }
 })
 
 export default withNavigation(Header);

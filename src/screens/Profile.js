@@ -11,6 +11,7 @@ import {
 
 import { withNavigation } from 'react-navigation'
 import { MainTemplate } from '../presentation'
+import SvgUri from 'react-native-svg-uri'
 import config from '../config'
 
 class Profile extends Component {
@@ -19,6 +20,8 @@ class Profile extends Component {
     this.state = {
       screenWidth: Dimensions.get('window').width,
       username: '',
+      avatar: null,
+      avatarType: 'image'
     }
   }
 
@@ -27,20 +30,17 @@ class Profile extends Component {
     AsyncStorage.getItem('user').then(userJson => {
       const user = JSON.parse(userJson)
       let capitalized = this.capitalizeFirstLetter(user.name)
-      this.setState({username: capitalized})
+
+      console.log(user)
+      this.setState({
+        username: capitalized,
+        avatar: user.avatar.url,
+        avatarType: 'svg',
+      })
     })
   }
 
   // Methods
-  removeItemValue = async (key) => {
-    try {
-      await AsyncStorage.removeItem(key)
-    }
-    catch(err) {
-      return false
-    }
-  }
-
   capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
@@ -51,11 +51,10 @@ class Profile extends Component {
 
   logout = () => {
     console.log('LOGGED OUT')
-    this.removeItemValue('token')
-    this.removeItemValue('user')
-    this.removeItemValue('email')
-    this.removeItemValue('password')
-    this.props.navigation.navigate('Auth')
+    const remove = ['token', 'user', 'email', 'password']
+    AsyncStorage.multiRemove(remove, () => {
+      this.props.navigation.navigate('Auth')
+    })
   }
 
   // Render
@@ -69,14 +68,35 @@ class Profile extends Component {
       }
     })
 
+    let avatar = (
+      <Image
+        style={compStyles.avatar}
+        source={config.images.fakeAvatar}
+      />
+    )
+
+    if (this.state.avatar && this.state.avatarType == 'svg') {
+      avatar = (
+        <SvgUri
+          width={md}
+          height={md}
+          source={{ uri: this.state.avatar }}
+        />
+      )
+    } else if (this.state.avatar) {
+      avatar = (
+        <Image
+          style={compStyles.avatar}
+          source={{uri: this.state.avatar}}
+        />
+      )
+    }
+
     // Component
     return (
       <MainTemplate title="My Shortology">
         <View style={{marginTop: 20}}>
-          <Image
-            style={compStyles.avatar}
-            source={config.images.fakeAvatar}
-          />
+          {avatar}
           <Text style={styles.username}>{this.state.username}</Text>
         </View>
         <View>

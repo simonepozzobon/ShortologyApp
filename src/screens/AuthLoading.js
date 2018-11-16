@@ -56,7 +56,6 @@ class AuthLoading extends Component {
       }  else {
         // user non è loggato
         console.log('token NON valido')
-        // this._redirectUnauthorized()
         this._reAuthenticateUser()
       }
     }).done()
@@ -64,7 +63,7 @@ class AuthLoading extends Component {
 
   _validateToken = (token) => {
     axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
-    axios.get(config.api.path + '/user').then(response => {
+    axios.get(config.api.path + '/app/user').then(response => {
 
       // formatta la risposta e la salva nel dispositivo
       const user = JSON.stringify(response.data)
