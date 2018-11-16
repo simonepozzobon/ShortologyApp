@@ -9,9 +9,16 @@ import {
   View,
 } from 'react-native'
 
+import {
+  getUser
+} from '../redux/actions/UserActions'
+import { connect } from 'react-redux'
+
 import { MainTemplate } from '../presentation'
 import axios from 'axios'
 import config from '../config'
+import PropTypes from 'prop-types'
+
 
 class AuthLoading extends Component {
   constructor(props) {
@@ -19,6 +26,7 @@ class AuthLoading extends Component {
     this.state = {
       screenWidth: Dimensions.get('window').width
     }
+
     this._bootstrapAsync()
   }
 
@@ -72,13 +80,10 @@ class AuthLoading extends Component {
 
   _reAuthenticateUser = () => {
     console.log('nuovo tentativo di autenticazione')
-    let email, password
-    AsyncStorage.getItem('email').then(value => {
-      email = value
-      AsyncStorage.getItem('password').then(value => {
-        password = value
-        this._attemptLogin(email, password)
-      })
+    AsyncStorage.multiGet(['email', 'password'], (err, store) => {
+      let email = store[0][1]
+      let password = store[1][1]
+      this._attemptLogin(email, password)
     })
   }
 
@@ -92,26 +97,20 @@ class AuthLoading extends Component {
       if (response.data.success) {
         console.log('nuovo tentativo di autenticazione riuscito')
         const user = JSON.stringify(response.data.user)
+        const token = response.data.token
 
-        // Salva il token
-        AsyncStorage.setItem('token', response.data.token, () => {
-          // Salva l'utente
-          AsyncStorage.setItem('user', user, () => {
-            this._redirectAuthorized()
-          })
+        AsyncStorage.multiSet([
+          ['user', user],
+          ['token', token]
+        ], () => {
+          this._redirectAuthorized()
         })
-
       } else {
         // se il login non funziona l'utente dovrà loggarsi di nuovo manualmente
         console.log('nuovo tentativo di autenticazione NON riuscito')
-        AsyncStorage.removeItem('token', () => {
-          AsyncStorage.removeItem('user', () => {
-            AsyncStorage.removeItem('email', () => {
-              AsyncStorage.removeItem('password', () => {
-                this._redirectUnauthorized()
-              })
-            })
-          })
+        const remove = ['token', 'user', 'email', 'password']
+        AsyncStorage.multiRemove(remove, () => {
+          this._redirectUnauthorized()
         })
       }
     })
@@ -212,4 +211,14 @@ const styles = StyleSheet.create({
   }
 })
 
-export default AuthLoading;
+// AuthLoading.propTypes = {
+//   getUser: PropTypes.func.isRequired,
+//   randomPeople: PropTypes.object.isRequired
+// }
+
+const mapStateToProps = state => {
+  return {
+    randomPeople: state
+  }
+}
+export default connect(mapStateToProps, { getUser })(AuthLoading);
