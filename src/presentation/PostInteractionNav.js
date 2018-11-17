@@ -59,6 +59,12 @@ class PostInteractionNav extends Component {
         err && console.log(err)
       })
   }
+
+  focusComment = () => {
+    Vibration.vibrate(2)
+    this.props.focusComment()
+  }
+
   // Render
   render() {
     // Dynamic styles
@@ -81,7 +87,7 @@ class PostInteractionNav extends Component {
 
         <TouchableOpacity
           style={styles.btnImage}
-          onPress={this.props.focusComment}
+          onPress={this.focusComment}
         >
           <Image
             source={config.icons.comment}
