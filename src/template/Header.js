@@ -118,6 +118,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: 35,
     fontSize: 18,
+    textAlign: 'center',
   },
 
   headerImage: {

@@ -4,6 +4,7 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
+  Vibration,
   View,
 } from 'react-native'
 import Share from 'react-native-share'
@@ -30,7 +31,7 @@ class PostInteractionNav extends Component {
 
   // Methods
   likePost = () => {
-    console.log('path per api', config.api.path + '/app/' + this.props.id + '/like-it')
+    Vibration.vibrate(10)
     fetch(config.api.path + '/app/' + this.state.user.author.id + '/' + this.props.id + '/like-it')
       .then(response => response.json())
       .then(responseJson => {
