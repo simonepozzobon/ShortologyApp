@@ -31,7 +31,7 @@ class PostInteractionNav extends Component {
 
   // Methods
   likePost = () => {
-    Vibration.vibrate(10)
+    Vibration.vibrate(2)
     fetch(config.api.path + '/app/' + this.state.user.author.id + '/' + this.props.id + '/like-it')
       .then(response => response.json())
       .then(responseJson => {
