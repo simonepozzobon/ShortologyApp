@@ -73,7 +73,6 @@ class AuthLoading extends Component {
 
     }).catch(err => {
       // se non riesce a recuperare l'utente prova ad autenticarlo di nuovo
-      console.log(err)
       this._reAuthenticateUser()
     })
   }

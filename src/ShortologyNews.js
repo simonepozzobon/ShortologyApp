@@ -2,8 +2,10 @@ import React, { Component } from 'react'
 import {
   AsyncStorage,
   StyleSheet,
+  View,
 } from 'react-native'
 
+import PushController from './PushController'
 import { createSwitchNavigator, createStackNavigator } from 'react-navigation'
 
 // Screens
@@ -88,8 +90,8 @@ const MainStack = createSwitchNavigator({
 })
 
 class ShortologyNews extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {}
   }
 
@@ -101,7 +103,11 @@ class ShortologyNews extends Component {
 
   }
   render() {
-    return <MainStack/>
+    return (
+        <PushController>
+          <MainStack/>
+        </PushController>
+    )
   }
 }
 
