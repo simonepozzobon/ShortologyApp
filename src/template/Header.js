@@ -8,9 +8,23 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native'
+import { ifIphoneX } from 'react-native-iphone-x-helper'
 import { withNavigation } from 'react-navigation'
 import SvgUri from 'react-native-svg-uri'
 import config from '../config'
+
+let marginTop = 15
+
+const compStyles = StyleSheet.create({
+  iphone: {
+    ...ifIphoneX({
+      marginTop: 35,
+    }, {
+      marginTop: 15,
+    })
+  }
+})
+
 
 class Header extends Component {
   constructor() {
@@ -40,14 +54,12 @@ class Header extends Component {
   // Render
   render() {
     // Dynamic styles
-    const compStyles = StyleSheet.create({})
-
     const itemOpacity = 0.7
 
     let avatar = (
       <Image
         source={config.images.defaultAvatar}
-        style={styles.headerImage}
+        style={[styles.headerImage, compStyles.iphone]}
       />
     )
 
@@ -63,7 +75,7 @@ class Header extends Component {
     } else if (this.state.avatar) {
       avatar = (
         <Image
-          style={styles.headerImageAv}
+          style={[styles.headerImageAv, compStyles.iphone]}
           source={{ uri: this.state.avatar }}
         />
       )
@@ -79,10 +91,10 @@ class Header extends Component {
           >
             <Image
               source={config.images.logo}
-              style={styles.headerImage}
+              style={[styles.headerImage, compStyles.iphone]}
             />
           </TouchableOpacity>
-          <Text style={styles.title}>{this.props.title}</Text>
+          <Text style={[styles.title, compStyles.iphone]}>{this.props.title}</Text>
           <TouchableOpacity
             activeOpacity={itemOpacity}
             onPress={() => {this.goTo('profile')}}
@@ -96,7 +108,7 @@ class Header extends Component {
     return (
       <View style={styles.header}>
         <TouchableOpacity activeOpacity={itemOpacity} onPress={() => {this.goTo('home')}}>
-          <Image source={config.images.logo}  style={styles.headerImage}></Image>
+          <Image source={config.images.logo}  style={[styles.headerImage, compStyles.iphone]}></Image>
         </TouchableOpacity>
         {avatar}
       </View>
@@ -117,20 +129,20 @@ const styles = StyleSheet.create({
   title: {
     fontFamily: 'Montserrat',
     fontWeight: 'bold',
-    marginTop: 35,
+    // marginTop: 35,
     fontSize: 18,
     textAlign: 'center',
   },
 
   headerImage: {
-    marginTop: 35,
+    // marginTop: 35,
     width: 75,
     height: 75,
     resizeMode: 'contain',
   },
 
   headerImageAv: {
-    marginTop: 35,
+    // marginTop: 35,
     width: 50,
     height: 50,
     marginRight: 5,
@@ -138,10 +150,11 @@ const styles = StyleSheet.create({
   },
 
   svgHeader: {
-    marginTop: 35,
+    // marginTop: 35,
     marginRight: 5,
     resizeMode: 'contain',
-  }
+    ...compStyles.iphone
+  },
 })
 
 export default withNavigation(Header);
