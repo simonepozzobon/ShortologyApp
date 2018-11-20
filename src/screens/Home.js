@@ -7,6 +7,8 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native'
+
+import PushController from '../PushController'
 import { withNavigation } from 'react-navigation'
 import LinearGradient from 'react-native-linear-gradient'
 import config from '../config'
@@ -54,19 +56,21 @@ class Home extends Component {
 
     // Component
     return (
-      <MainTemplate title=" ">
-        <TouchableOpacity activeOpacity={itemOpacity} onPress={() => {this.goTo('itsMonday')}}>
-          <Image source={config.images.itsMonday} style={compStyles.menuItem}></Image>
-        </TouchableOpacity>
-        <TouchableOpacity activeOpacity={itemOpacity} onPress={() => {this.goTo('itsFriday')}}>
-          <Image source={config.images.itsFriday} style={compStyles.menuItem}></Image>
-        </TouchableOpacity>
-        <View style={styles.footer}>
-          <TouchableOpacity activeOpacity={itemOpacity} onPress={() => {this.goTo('hitParade')}}>
-            <Image source={config.images.hitParade} style={compStyles.smallMenuItem}></Image>
+      <PushController>
+        <MainTemplate title=" ">
+          <TouchableOpacity activeOpacity={itemOpacity} onPress={() => {this.goTo('itsMonday')}}>
+            <Image source={config.images.itsMonday} style={compStyles.menuItem}></Image>
           </TouchableOpacity>
-        </View>
-      </MainTemplate>
+          <TouchableOpacity activeOpacity={itemOpacity} onPress={() => {this.goTo('itsFriday')}}>
+            <Image source={config.images.itsFriday} style={compStyles.menuItem}></Image>
+          </TouchableOpacity>
+          <View style={styles.footer}>
+            <TouchableOpacity activeOpacity={itemOpacity} onPress={() => {this.goTo('hitParade')}}>
+              <Image source={config.images.hitParade} style={compStyles.smallMenuItem}></Image>
+            </TouchableOpacity>
+          </View>
+        </MainTemplate>
+      </PushController>
     );
   }
 }

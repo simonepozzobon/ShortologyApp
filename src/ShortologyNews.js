@@ -5,7 +5,6 @@ import {
   View,
 } from 'react-native'
 
-import PushController from './PushController'
 import { createSwitchNavigator, createStackNavigator } from 'react-navigation'
 
 // Screens
@@ -104,9 +103,7 @@ class ShortologyNews extends Component {
   }
   render() {
     return (
-        <PushController>
-          <MainStack/>
-        </PushController>
+        <MainStack/>
     )
   }
 }

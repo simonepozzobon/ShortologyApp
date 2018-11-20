@@ -27,7 +27,14 @@ class AuthLoading extends Component {
       screenWidth: Dimensions.get('window').width
     }
 
-    this._bootstrapAsync()
+
+    // debug
+    AsyncStorage.multiSet([
+      ['email', 'info@simonepozzobon.com'],
+      ['password', 'password']
+    ]).then(() => {
+      this._bootstrapAsync()
+    })
   }
 
   removeItemValue = async (key) => {

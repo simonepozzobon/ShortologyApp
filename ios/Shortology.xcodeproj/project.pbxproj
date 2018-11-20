@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		0036F0AE9E24459FBA9D1D90 /* Montserrat-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3F5F57F114A64A289FF897D8 /* Montserrat-ExtraBold.ttf */; };
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
@@ -17,8 +16,8 @@
 		03ECEF1B69F241BEB2D025F3 /* Montserrat-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F17425DECF584825A593BE63 /* Montserrat-ExtraLightItalic.ttf */; };
 		05B4D72BAE9348F09480D74B /* libRNSVG-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 55A003EC40FC4E64AD069682 /* libRNSVG-tvOS.a */; };
 		0B956BA3D7CC40949D252399 /* Montserrat-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D96D4D0487084BEC85D3853E /* Montserrat-ExtraBoldItalic.ttf */; };
-		0C59A41821A0B74500626310 /* AuthenticationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C59A41721A0B74500626310 /* AuthenticationServices.framework */; };
 		0C59A46221A0BE3C00626310 /* libRCTPushNotification.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C59A43E21A0BDCD00626310 /* libRCTPushNotification.a */; };
+		0CA8D09521A38192000E5499 /* AuthenticationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CA8D09421A38192000E5499 /* AuthenticationServices.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		11D1A2F320CAFA9E000508D9 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 78C398B91ACF4ADC00677621 /* libRCTLinking.a */; };
 		139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139105C11AF99BAD00B5F7CC /* libRCTSettings.a */; };
@@ -425,6 +424,7 @@
 		0C59A41621A0B71500626310 /* Shortology.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Shortology.entitlements; path = Shortology/Shortology.entitlements; sourceTree = "<group>"; };
 		0C59A41721A0B74500626310 /* AuthenticationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AuthenticationServices.framework; path = System/Library/Frameworks/AuthenticationServices.framework; sourceTree = SDKROOT; };
 		0C59A42A21A0BDCD00626310 /* RCTPushNotification.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTPushNotification.xcodeproj; path = "../node_modules/react-native/Libraries/PushNotificationIOS/RCTPushNotification.xcodeproj"; sourceTree = "<group>"; };
+		0CA8D09421A38192000E5499 /* AuthenticationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AuthenticationServices.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/AuthenticationServices.framework; sourceTree = DEVELOPER_DIR; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* Shortology.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shortology.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -486,7 +486,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C59A41821A0B74500626310 /* AuthenticationServices.framework in Frameworks */,
+				0CA8D09521A38192000E5499 /* AuthenticationServices.framework in Frameworks */,
 				0C59A46221A0BE3C00626310 /* libRCTPushNotification.a in Frameworks */,
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
 				11D1A2F320CAFA9E000508D9 /* libRCTAnimation.a in Frameworks */,
@@ -721,6 +721,7 @@
 			isa = PBXGroup;
 			children = (
 				0C59A41721A0B74500626310 /* AuthenticationServices.framework */,
+				0CA8D09421A38192000E5499 /* AuthenticationServices.framework */,
 				2D16E6891FA4F8E400B85C8A /* libReact.a */,
 			);
 			name = Frameworks;
