@@ -147,14 +147,16 @@ const styles = StyleSheet.create({
   },
 
   headerImageAv: {
-    width: 75,
-    height: 75,
+    width: 45,
+    height: 45,
     marginRight: 5,
     resizeMode: 'contain',
   },
 
   svgHeader: {
     marginRight: 5,
+    height: 75,
+    width: 75,
     resizeMode: 'contain',
     ...compStyles.iphone
   },
