@@ -40,7 +40,7 @@ class CommentArea extends Component {
     }
 
     setComment = (comment) => {
-      console.log('modifica', comment)
+      // console.log('modifica', comment)
       this.setState({comment: comment})
     }
 
