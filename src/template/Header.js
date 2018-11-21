@@ -8,20 +8,24 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native'
-import { ifIphoneX } from 'react-native-iphone-x-helper'
+import { isIphoneX } from 'react-native-iphone-x-helper'
 import { withNavigation } from 'react-navigation'
 import SvgUri from 'react-native-svg-uri'
 import config from '../config'
 
-let marginTop = 15
+let marginTop = 0
+
+if (Platform.OS === 'ios') {
+  if (isIphoneX()) {
+    marginTop = 35
+  } else {
+    marginTop = 15
+  }
+}
 
 const compStyles = StyleSheet.create({
   iphone: {
-    ...ifIphoneX({
-      marginTop: 35,
-    }, {
-      marginTop: 15,
-    })
+    marginTop: marginTop
   }
 })
 
@@ -143,8 +147,8 @@ const styles = StyleSheet.create({
 
   headerImageAv: {
     // marginTop: 35,
-    width: 50,
-    height: 50,
+    width: 75,
+    height: 75,
     marginRight: 5,
     resizeMode: 'contain',
   },

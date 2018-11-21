@@ -21,15 +21,11 @@ class Home extends Component {
 
   constructor() {
     super()
-    this.state = {
-      screenWidth: 0
-    }
+    this.state = {}
   }
 
   // Component State Management
-  componentDidMount() {
-    this.setState({screenWidth: Dimensions.get('window').width})
-  }
+  componentDidMount() {}
 
   // Methods
   goTo(route) {
@@ -39,16 +35,42 @@ class Home extends Component {
   // Render
   render() {
     // Dynamic styles
+    const height = Dimensions.get('window').height - 100
+    const width = Dimensions.get('window').width
+
+    let menuItemRatio = 2
+    let smallMenuItemRatio = menuItemRatio * 2
+    let menuItem = Math.floor(width / menuItemRatio)
+    let smallMenuItem = Math.floor(width / smallMenuItemRatio)
+    let totalMargin = (20 * 6)
+
+    let totalSize = smallMenuItem + (menuItem * 2) + totalMargin
+    console.log(totalSize, height)
+
+    while (totalSize >= (height) ) {
+      // Increase ratio
+      menuItemRatio = menuItemRatio + 0.1
+      smallMenuItemRatio = menuItemRatio * 2
+
+      // New Item Size
+      menuItem = Math.floor(width / menuItemRatio)
+      smallMenuItem = Math.floor(width / smallMenuItemRatio)
+
+      // Re-calculate total size
+      totalSize = smallMenuItem + (menuItem * 2) + totalMargin
+    }
+
     const compStyles = StyleSheet.create({
       menuItem: {
-        width: Math.floor(this.state.screenWidth / 2),
-        height: Math.floor(this.state.screenWidth / 2),
+        width: menuItem,
+        height: menuItem,
         margin: 20,
       },
 
       smallMenuItem: {
-        width: Math.floor(this.state.screenWidth / 4),
-        height: Math.floor(this.state.screenWidth / 4),
+        width: smallMenuItem,
+        height: smallMenuItem,
+        marginTop: 20
       }
     })
 
