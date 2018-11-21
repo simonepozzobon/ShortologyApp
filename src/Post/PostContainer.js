@@ -60,6 +60,12 @@ class PostContainer extends Component {
     })
   }
 
+  stopVideo = () => {
+    if (this.postMediaContent) {
+      this.postMediaContent.stopVideo()
+    }
+  }
+
   // Render
   render() {
     // Dynamic styles
@@ -82,6 +88,7 @@ class PostContainer extends Component {
         <ScrollView contentContainerStyle={{flex: 1, paddingBottom: 148}}>
           <PostContent
             post={this.props.post}
+            ref={ref => this.postMediaContent = ref }
           />
           <PostInteractionNav
             id={this.props.post.id}

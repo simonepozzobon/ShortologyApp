@@ -34,7 +34,10 @@ class SinglePost extends Component {
       firstItem: 0,
       screenWidth: Dimensions.get('window').width,
       user: {},
+      postContainer: []
     }
+
+    this.beforeSnapToItem = this.beforeSnapToItem.bind(this)
   }
 
   // Component State Management
@@ -62,13 +65,26 @@ class SinglePost extends Component {
       })
   }
 
-  // Methods
+  componentWillUnmount() {
+    console.log('ditruggiiii')
+  }
 
-  renderItem = (data, index) => {
+  // Methods
+  beforeSnapToItem = (index) => {
+    for (var i = 0; i < this.state.postContainer.length; i++) {
+      if (this.state.postContainer[i]) {
+        this.state.postContainer[i].stopVideo()
+      }
+    }
+  }
+
+  renderItem = (data) => {
     return (
       <PostContainer
         post={data.item}
         user={this.state.user}
+        pauseVideo={this.pauseVideo}
+        ref={ref => this.state.postContainer[data.index] = ref}
       />
     )
   }
@@ -107,6 +123,7 @@ class SinglePost extends Component {
           sliderWidth={this.state.screenWidth}
           itemWidth={this.state.screenWidth}
           removeClippedSubviews={true}
+          onBeforeSnapToItem={this.beforeSnapToItem}
         />
       </MainTemplate>
     );

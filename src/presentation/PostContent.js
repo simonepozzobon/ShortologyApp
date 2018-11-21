@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import {
+  ActivityIndicator,
+  Animated,
   Dimensions,
   Image,
   StyleSheet,
@@ -15,7 +17,12 @@ class PostContent extends Component {
     super(props)
     this.state = {
       screenWidth: Dimensions.get('window').width,
+      paused: true,
+      muted: false,
+      buffering: true,
+      animated: new Animated.Value(0)
     }
+
   }
 
   // Component State Management
@@ -23,6 +30,28 @@ class PostContent extends Component {
   componentDidMount() {}
 
   // Methods
+  playVideo = () => {
+    this.setState(state => {
+      return {
+        paused: !state.paused
+      }
+    })
+  }
+
+  stopVideo = () => {
+    // ferma il video
+    this.setState({ paused: true })
+  }
+
+  handleBuffer = (meta) => {
+    if (!meta.isBuffering) {
+      this.setState({buffering: false})
+    }
+  }
+
+  handleEnd = () => {
+    this.videoPlayer.seek(0)
+  }
 
   // Render
   render() {
@@ -34,6 +63,29 @@ class PostContent extends Component {
         height: imgSize,
       }
     })
+
+    let buffering = null
+    if (this.state.buffering) {
+      buffering = (
+        <View style={styles.videoCover}>
+          <ActivityIndicator
+            size="large"
+            color={config.colors.primary}
+          />
+        </View>
+      )
+    }
+
+    let control = null
+    if (this.state.paused) {
+      control = (
+        <View style={styles.videoCover}>
+          <View style={styles.videoPlayBtn}>
+            <Image source={config.icons.play} style={styles.videoPlayIcon}/>
+          </View>
+        </View>
+      )
+    }
 
     // Component
     let content = (
@@ -47,21 +99,30 @@ class PostContent extends Component {
     if (this.props.post.isvideo) {
       // Contenuto Video
       content = (
-        <View>
+        <TouchableOpacity
+          onPress={this.playVideo}
+        >
           <Video
             source={{ uri: this.props.post.video }}
             style={compStyles.postImage}
-            controls={true}
+            controls={false}
             fullscreen={false}
             ignoreSilentSwitch="obey"
-            paused={true}
+            paused={this.state.paused}
+            muted={this.state.muted}
             resizeMode="contain"
+            ref={ref => this.videoPlayer = ref}
+            onBuffer={this.handleBuffer}
+            onEnd={this.handleEnd}
+            onSeek={this.stopVideo}
             // poster={this.props.post.full_img}
           />
-        </View>
+          {buffering}
+          {control}
+        </TouchableOpacity>
       )
     }
-    
+
     return (
       <View style={[styles.contentContainer]}>
         {content}
@@ -79,6 +140,34 @@ const styles = StyleSheet.create({
     shadowOffset: {width: 2, height: 4},
     shadowOpacity: 0.05,
     shadowRadius: 4,
+  },
+
+  videoCover: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'transparent',
+  },
+
+  videoPlayBtn: {
+    width: 60,
+    height: 60,
+    backgroundColor: config.colors.black,
+    opacity: 0.8,
+    borderRadius: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  videoPlayIcon: {
+    width: 25,
+    height: 25,
+    marginLeft: 4,
+    tintColor: '#fff',
   },
 })
 

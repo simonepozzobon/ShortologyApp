@@ -10,7 +10,6 @@ import {
 import { withNavigation } from 'react-navigation'
 import config from '../config'
 
-
 // const calculateFontBase = (size) => {
 //   return Math.round(size / config.utils.screenRatio)
 // }
