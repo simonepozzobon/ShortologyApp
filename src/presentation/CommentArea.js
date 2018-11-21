@@ -52,10 +52,12 @@ class CommentArea extends Component {
       data.append('id', this.commentableId())
 
       const url = config.api.path + '/app/comments/create'
-      console.log(url)
+      // console.log(url)
 
       axios.post(url, data).then(response => {
-        console.log(response)
+        // DEbug
+        // console.log(response)
+
         // clear comment area
         this.input.clear()
 
