@@ -40,12 +40,12 @@ class Home extends Component {
 
     let menuItemRatio = 2
     let smallMenuItemRatio = menuItemRatio * 2
+
     let menuItem = Math.floor(width / menuItemRatio)
     let smallMenuItem = Math.floor(width / smallMenuItemRatio)
-    let totalMargin = (20 * 6)
 
+    let totalMargin = (20 * 6)
     let totalSize = smallMenuItem + (menuItem * 2) + totalMargin
-    console.log(totalSize, height)
 
     while (totalSize >= (height) ) {
       // Increase ratio
