@@ -29,6 +29,9 @@ const compStyles = StyleSheet.create({
   }
 })
 
+const calculateFontSize = (size) => {
+  return Math.round(config.utils.screenRatio * size)
+}
 
 class Header extends Component {
   constructor() {
@@ -133,20 +136,17 @@ const styles = StyleSheet.create({
   title: {
     fontFamily: 'Montserrat',
     fontWeight: 'bold',
-    // marginTop: 35,
-    fontSize: 18,
+    fontSize: calculateFontSize(15),
     textAlign: 'center',
   },
 
   headerImage: {
-    // marginTop: 35,
     width: 75,
     height: 75,
     resizeMode: 'contain',
   },
 
   headerImageAv: {
-    // marginTop: 35,
     width: 75,
     height: 75,
     marginRight: 5,
@@ -154,7 +154,6 @@ const styles = StyleSheet.create({
   },
 
   svgHeader: {
-    // marginTop: 35,
     marginRight: 5,
     resizeMode: 'contain',
     ...compStyles.iphone

@@ -75,7 +75,7 @@ const AppStack = createSwitchNavigator({
     screen: MyAvatarColor,
   },
 }, {
-  initialRouteName: 'home',
+  initialRouteName: 'profile',
 })
 
 const MainStack = createSwitchNavigator({

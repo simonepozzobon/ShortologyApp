@@ -10,6 +10,17 @@ import {
 import { withNavigation } from 'react-navigation'
 import config from '../config'
 
+
+const calculateFontBase = (size) => {
+  return Math.round(size / config.utils.screenRatio)
+}
+
+const calculateFontSize = (size) => {
+  return Math.round(config.utils.screenRatio * size)
+}
+
+console.log('diventa ->', calculateFontBase(9), 'da ->', calculateFontSize(8))
+
 class HitParadeSingle extends Component {
   constructor(props) {
     super(props)
@@ -62,7 +73,7 @@ class HitParadeSingle extends Component {
           />
           <Text style={styles.title}>{this.props.post.title}</Text>
           <Text style={styles.votes}>
-            [  <Text style={{fontWeight: 'normal'}}>{this.props.post.likes_count} Votes</Text>  ]
+            [  <Text style={{fontWeight: 'normal', fontSize: calculateFontSize(9)}}>{this.props.post.likes_count} Votes</Text>  ]
           </Text>
         </View>
       </TouchableOpacity>
@@ -86,7 +97,7 @@ const styles = StyleSheet.create({
 
   title: {
     fontFamily: 'Montserrat',
-    fontSize: 16,
+    fontSize: calculateFontSize(11),
     fontWeight: 'bold',
     paddingBottom: 10,
   },

@@ -1,3 +1,5 @@
+import { Dimensions } from 'react-native'
+
 export default {
   // api
   api: {
@@ -50,6 +52,10 @@ export default {
   styleConst: {
     bgBlue: {},
     container: {},
+  },
+
+  utils: {
+    screenRatio: Dimensions.get('window').width / 320,
   },
 
   avatar: {

@@ -14,6 +14,10 @@ import { MainTemplate } from '../presentation'
 import SvgUri from 'react-native-svg-uri'
 import config from '../config'
 
+const calculateFontSize = (size) => {
+  return Math.round(config.utils.screenRatio * size)
+}
+
 class Profile extends Component {
   constructor(props) {
     super(props)
@@ -131,27 +135,27 @@ const styles = StyleSheet.create({
     fontFamily: 'Montserrat',
     fontWeight: 'bold',
     marginTop: 25,
-    fontSize: 24,
+    fontSize: calculateFontSize(20.5),
     color: config.colors.black,
+    marginBottom: 36,
   },
 
   btnText: {
-    marginTop: 20,
     paddingHorizontal: 24,
+    paddingVertical: 12,
     justifyContent: 'center',
     alignItems: 'center',
-    height: 44,
   },
 
   btnTextStyle: {
     fontFamily: 'Montserrat',
-    fontSize: 16,
+    fontSize: calculateFontSize(14),
     fontWeight: 'bold',
     color: config.colors.black,
   },
 
   btnGray: {
-    marginTop: 35,
+    marginTop: 36,
     paddingHorizontal: 24,
     justifyContent: 'center',
     alignItems: 'center',
