@@ -10,6 +10,10 @@ import {
 import { withNavigation } from 'react-navigation'
 import config from '../config'
 
+const calculateFontSize = (size) => {
+  return Math.round(config.utils.screenRatio * size)
+}
+
 class FavouritedSingle extends Component {
   constructor(props) {
     super(props)
@@ -52,7 +56,7 @@ class FavouritedSingle extends Component {
           <Text style={styles.category}>{this.props.post.category.title}</Text>
           <Text style={styles.title}>{this.props.post.title}</Text>
           <Text style={styles.votes}>
-            [  <Text style={{fontWeight: 'normal'}}>{this.props.post.likes_count} Votes</Text>  ]
+            [  <Text style={{fontWeight: 'normal', fontSize: calculateFontSize(9)}}>{this.props.post.likes_count} Votes</Text>  ]
           </Text>
         </View>
       </TouchableOpacity>
@@ -77,14 +81,14 @@ const styles = StyleSheet.create({
 
   category: {
     fontFamily: 'Montserrat',
-    fontSize: 16,
+    fontSize: calculateFontSize(11),
     fontWeight: 'normal',
     paddingBottom: 10,
   },
 
   title: {
     fontFamily: 'Montserrat',
-    fontSize: 16,
+    fontSize: calculateFontSize(11),
     fontWeight: 'bold',
     paddingBottom: 10,
   },

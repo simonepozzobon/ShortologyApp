@@ -11,15 +11,13 @@ import { withNavigation } from 'react-navigation'
 import config from '../config'
 
 
-const calculateFontBase = (size) => {
-  return Math.round(size / config.utils.screenRatio)
-}
+// const calculateFontBase = (size) => {
+//   return Math.round(size / config.utils.screenRatio)
+// }
 
 const calculateFontSize = (size) => {
   return Math.round(config.utils.screenRatio * size)
 }
-
-console.log('diventa ->', calculateFontBase(9), 'da ->', calculateFontSize(8))
 
 class HitParadeSingle extends Component {
   constructor(props) {
