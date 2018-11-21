@@ -29,12 +29,12 @@ class AuthLoading extends Component {
 
 
     // debug
-    AsyncStorage.multiSet([
-      ['email', 'info@simonepozzobon.com'],
-      ['password', 'password']
-    ]).then(() => {
-      this._bootstrapAsync()
-    })
+    // AsyncStorage.multiSet([
+    //   ['email', 'info@simonepozzobon.com'],
+    //   ['password', 'password']
+    // ]).then(() => {
+    // })
+    this._bootstrapAsync()
   }
 
   removeItemValue = async (key) => {

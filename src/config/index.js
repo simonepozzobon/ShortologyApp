@@ -3,10 +3,10 @@ import { Dimensions } from 'react-native'
 export default {
   // api
   api: {
-    path: 'http://192.168.1.3:3004/api'
+    path: 'https://shortology.it/api'
   },
 
-  website: 'http://192.168.1.3:3004',
+  website: 'https://shortology.it',
 
 
   // Images
