@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {
+  ActivityIndicator,
   AsyncStorage,
   Dimensions,
   Image,
@@ -45,7 +46,7 @@ class MyAvatarColor extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      isLoading: true,
+      isLoading: false,
       imageId: props.navigation.state.params.imageId,
       imageUri: props.navigation.state.params.imageUri,
       itemWidth: Dimensions.get('window').width * 0.5,
@@ -63,11 +64,12 @@ class MyAvatarColor extends Component {
   }
 
   saveAvatar = () => {
+    this.setState({isLoading: true})
     let data = new FormData()
     data.append('id', this.state.imageId)
     data.append('color', this.state.color)
     data.append('author_id', this.props.user.user.author.id)
-    console.log(this.state.imageId, this.state.color, this.props.user.user.author.id)
+    // console.log(this.state.imageId, this.state.color, this.props.user.user.author.id)
 
     axios.post(config.api.path + '/app/avatars/add-background', data).then(response => {
       this.props.setAvatar(response.data.user.avatar)
@@ -102,24 +104,45 @@ class MyAvatarColor extends Component {
       </View>
     )
 
+    let content = (
+      <View
+        style={{flex: 1, marginBottom: 40}}
+      >
+        <ColorPicker
+          colors={colorsList}
+          setColor={this.setColor}
+        />
+      </View>
+    )
+
+    let btn = (
+      <TouchableOpacity
+        style={styles.btnPrimary}
+        onPress={this.saveAvatar}
+      >
+        <Text style={styles.btnPrimaryText}>Save</Text>
+      </TouchableOpacity>
+    )
+
+    if (this.state.isLoading) {
+      content = (
+        <View style={{flex: 8, justifyContent: 'center', alignItems: 'center'}}>
+          <ActivityIndicator
+            size="large"
+            color={config.colors.primary}
+          />
+        </View>
+      )
+
+      btn = null
+    }
+
     // Component
     return (
       <MainTemplate title="My Avatar">
         {imagePreview}
-        <View
-          style={{flex: 1, marginBottom: 40}}
-        >
-          <ColorPicker
-            colors={colorsList}
-            setColor={this.setColor}
-          />
-        </View>
-        <TouchableOpacity
-          style={styles.btnPrimary}
-          onPress={this.saveAvatar}
-        >
-          <Text style={styles.btnPrimaryText}>Save</Text>
-        </TouchableOpacity>
+        {content}
+        {btn}
       </MainTemplate>
     );
   }

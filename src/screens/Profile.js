@@ -32,8 +32,6 @@ class Profile extends Component {
       avatarType: 'image',
       user: {}
     }
-
-    console.log(this.props)
   }
 
   // Component State Management

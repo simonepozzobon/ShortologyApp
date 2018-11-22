@@ -47,7 +47,7 @@ class Home extends Component {
     let totalMargin = (20 * 6)
     let totalSize = smallMenuItem + (menuItem * 2) + totalMargin
 
-    while (totalSize >= (height) ) {
+    while (totalSize >= height) {
       // Increase ratio
       menuItemRatio = menuItemRatio + 0.1
       smallMenuItemRatio = menuItemRatio * 2

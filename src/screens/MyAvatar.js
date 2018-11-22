@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {
   ActivityIndicator,
+  Dimensions,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -13,9 +14,11 @@ import { Head, Body, Feet } from '../avatar'
 import config from '../config'
 import axios from 'axios'
 
+
+
 class MyAvatar extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       isLoading: true,
       headSelected: 0,
@@ -69,6 +72,34 @@ class MyAvatar extends Component {
 
   // Render
   render() {
+    const height = Dimensions.get('window').height - 100
+    const width = Dimensions.get('window').width
+
+    let headRatio = .3
+    let bodyRatio = .5
+    let legRatio = .45
+
+    const btnSize = 44 + 20 // from styles
+    const elsPadding = 20 //60 // from element styles
+
+    let headSize = Math.round(width * headRatio)
+    let bodySize = Math.round(width * bodyRatio)
+    let legSize = Math.round(width * legRatio)
+
+    let totalSize = headSize + bodySize + legSize + btnSize + elsPadding
+
+    while (totalSize >= height) {
+      headRatio = headRatio - 0.01
+      bodyRatio = bodyRatio - 0.01
+      legRatio = legRatio - 0.01
+
+      headSize = Math.round(width * headRatio)
+      bodySize = Math.round(width * bodyRatio)
+      legSize = Math.round(width * legRatio)
+
+      totalSize = headSize + bodySize + legSize + btnSize + elsPadding
+    }
+
     // Component
     let content = (
       <View style={{flex: 8, justifyContent: 'center', alignItems: 'center'}}>
@@ -83,13 +114,13 @@ class MyAvatar extends Component {
       content = (
         <View>
           <View style={{ flex: 1, justifyContent: 'center',  alignItems: 'center' }}>
-            <Head setHead={this.setHead}/>
+            <Head setHead={this.setHead} size={headSize}/>
           </View>
           <View style={{ flex: 1, justifyContent: 'center',  alignItems: 'center' }}>
-            <Body setBody={this.setBody}/>
+            <Body setBody={this.setBody} size={bodySize}/>
           </View>
           <View style={{ flex: 1, justifyContent: 'center',  alignItems: 'center' }}>
-            <Feet setLeg={this.setLeg}/>
+            <Feet setLeg={this.setLeg} size={legSize}/>
           </View>
           <View style={{ flex: 1, justifyContent: 'center',  alignItems: 'center' }}>
             <TouchableOpacity

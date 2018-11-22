@@ -36,8 +36,8 @@ class Head extends Component {
       <View>
         <Image
           style={{
-            width: this.state.screenWidth,
-            height: this.state.screenWidth,
+            width: this.props.size,
+            height: this.props.size,
             resizeMode: 'contain'
           }}
           source={data.item.img}
@@ -55,8 +55,8 @@ class Head extends Component {
         <Carousel
           data={config.avatar.head}
           renderItem={this.renderItem}
-          sliderWidth={this.state.screenWidth}
-          itemWidth={this.state.screenWidth}
+          sliderWidth={this.props.size}
+          itemWidth={this.props.size}
           onSnapToItem={this.setHead}
         />
       </View>
