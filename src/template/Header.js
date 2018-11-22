@@ -41,8 +41,8 @@ const calculateFontSize = (size) => {
 }
 
 class Header extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
   }
 
   // Methods
@@ -80,35 +80,22 @@ class Header extends Component {
     }
 
     // Component
-    if (this.props.title) {
-      return (
-        <View style={styles.header}>
-          <TouchableOpacity
-            activeOpacity={itemOpacity}
-            onPress={() => {this.goTo('home')}}
-          >
-            <Image
-              source={config.images.logo}
-              style={[styles.headerImage, compStyles.iphone]}
-            />
-          </TouchableOpacity>
-          <Text style={[styles.title, compStyles.iphone]}>{this.props.title}</Text>
-          <TouchableOpacity
-            activeOpacity={itemOpacity}
-            onPress={() => {this.goTo('profile')}}
-          >
-            {avatar}
-          </TouchableOpacity>
-        </View>
-      );
-    }
-
     return (
       <View style={styles.header}>
         <TouchableOpacity activeOpacity={itemOpacity} onPress={() => {this.goTo('home')}}>
           <Image source={config.images.logo}  style={[styles.headerImage, compStyles.iphone]}></Image>
         </TouchableOpacity>
-        {avatar}
+        <Text
+          style={[styles.title, compStyles.iphone]}
+        >
+          {this.props.title}
+        </Text>
+        <TouchableOpacity
+          activeOpacity={itemOpacity}
+          onPress={() => {this.goTo('profile')}}
+        >
+          {avatar}
+        </TouchableOpacity>
       </View>
     );
   }
@@ -158,7 +145,7 @@ const styles = StyleSheet.create({
 
 function mapStateToProps(state) {
   return {
-    user: state.user
+    user: state.user,
   }
 }
 

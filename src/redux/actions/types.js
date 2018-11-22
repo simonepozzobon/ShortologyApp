@@ -8,6 +8,8 @@ export const SET_MONDAY = 'SET_MONDAY'
 export const SET_FRIDAY = 'SET_FRIDAY'
 export const SET_HIT_PARADE = 'SET_HIT_PARADE'
 
+// TEMPLATE ACTIONS
+export const SET_TITLE = "SET_TITLE"
 
 // Deprecated
 export const FETCHING_USER_REQUEST = 'FETCHING_USER_REQUEST'
