@@ -18,6 +18,7 @@
 		05B4D72BAE9348F09480D74B /* libRNSVG-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 55A003EC40FC4E64AD069682 /* libRNSVG-tvOS.a */; };
 		0B956BA3D7CC40949D252399 /* Montserrat-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D96D4D0487084BEC85D3853E /* Montserrat-ExtraBoldItalic.ttf */; };
 		0C59A46221A0BE3C00626310 /* libRCTPushNotification.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C59A43E21A0BDCD00626310 /* libRCTPushNotification.a */; };
+		0C7FF64221A656DB0080D0A0 /* AppStaticImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C7FF64121A656DB0080D0A0 /* AppStaticImages.xcassets */; };
 		0CA8D09521A38192000E5499 /* AuthenticationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CA8D09421A38192000E5499 /* AuthenticationServices.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		11D1A2F320CAFA9E000508D9 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 78C398B91ACF4ADC00677621 /* libRCTLinking.a */; };
@@ -425,6 +426,7 @@
 		0C59A41621A0B71500626310 /* Shortology.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Shortology.entitlements; path = Shortology/Shortology.entitlements; sourceTree = "<group>"; };
 		0C59A41721A0B74500626310 /* AuthenticationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AuthenticationServices.framework; path = System/Library/Frameworks/AuthenticationServices.framework; sourceTree = SDKROOT; };
 		0C59A42A21A0BDCD00626310 /* RCTPushNotification.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTPushNotification.xcodeproj; path = "../node_modules/react-native/Libraries/PushNotificationIOS/RCTPushNotification.xcodeproj"; sourceTree = "<group>"; };
+		0C7FF64121A656DB0080D0A0 /* AppStaticImages.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppStaticImages.xcassets; sourceTree = "<group>"; };
 		0CA8D09421A38192000E5499 /* AuthenticationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AuthenticationServices.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/AuthenticationServices.framework; sourceTree = DEVELOPER_DIR; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
@@ -687,6 +689,7 @@
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
+				0C7FF64121A656DB0080D0A0 /* AppStaticImages.xcassets */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
@@ -1413,6 +1416,7 @@
 				33AEA467DE0A4F49A5A16100 /* Montserrat-MediumItalic.ttf in Resources */,
 				19068B46996C4A81B21B7951 /* Montserrat-Regular.ttf in Resources */,
 				B527423D0F5C4D018041B8CD /* Montserrat-SemiBold.ttf in Resources */,
+				0C7FF64221A656DB0080D0A0 /* AppStaticImages.xcassets in Resources */,
 				8CAC698B571C4EC394B0CB82 /* Montserrat-SemiBoldItalic.ttf in Resources */,
 				C4376D26E9ED47CC9615D680 /* Montserrat-Thin.ttf in Resources */,
 				4352AF949E4D439E80CD0777 /* Montserrat-ThinItalic.ttf in Resources */,
