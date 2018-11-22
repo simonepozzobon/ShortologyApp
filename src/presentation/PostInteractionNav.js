@@ -7,8 +7,13 @@ import {
   Vibration,
   View,
 } from 'react-native'
+
+// Components
 import Share from 'react-native-share'
 import config from '../config'
+
+// Libraries
+import { connect } from 'react-redux'
 
 class PostInteractionNav extends Component {
   constructor(props) {
@@ -16,7 +21,6 @@ class PostInteractionNav extends Component {
     this.state = {
       likeCount: 0,
       commentCount: 0,
-      user: props.user
     }
   }
 
@@ -32,7 +36,7 @@ class PostInteractionNav extends Component {
   // Methods
   likePost = () => {
     Vibration.vibrate(2)
-    fetch(config.api.path + '/app/' + this.state.user.author.id + '/' + this.props.id + '/like-it')
+    fetch(config.api.path + '/app/' + this.props.user.user.author.id + '/' + this.props.id + '/like-it')
       .then(response => response.json())
       .then(responseJson => {
         if (responseJson.success) {
@@ -139,4 +143,10 @@ const styles = StyleSheet.create({
   },
 })
 
-export default PostInteractionNav;
+function mapStateToProps(state) {
+  return {
+    user: state.user
+  }
+}
+
+export default connect(mapStateToProps, null)(PostInteractionNav);

@@ -5,15 +5,19 @@ import {
   TextInput,
   View,
 } from 'react-native'
-import axios from 'axios'
+
+// Components
 import config from '../config'
+
+// Libraries
+import axios from 'axios'
+import { connect } from 'react-redux'
 
 class CommentArea extends Component {
     constructor(props) {
       super(props)
       this.state = {
         replyTo: null,
-        author_id: props.user.author.id, // per debug impostato sul mio
         comment: '',
       }
 
@@ -47,7 +51,7 @@ class CommentArea extends Component {
     sendComment = () => {
       let data = new FormData()
       data.append('comment', this.state.comment)
-      data.append('author_id', this.state.author_id)
+      data.append('author_id', this.props.user.user.author.id)
       data.append('model', this.model())
       data.append('id', this.commentableId())
 
@@ -97,4 +101,10 @@ class CommentArea extends Component {
     }
 }
 
-export default CommentArea;
+function mapStateToProps(state) {
+  return {
+    user: state.user
+  }
+}
+
+export default connect(mapStateToProps, null)(CommentArea);

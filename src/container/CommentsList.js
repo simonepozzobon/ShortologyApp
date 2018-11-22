@@ -40,7 +40,6 @@ class CommentsList extends Component {
         comment={data.item}
         focusComment={this.focusComment}
         deleteComment={this.deleteComment}
-        user={this.props.user}
       />
     )
   }

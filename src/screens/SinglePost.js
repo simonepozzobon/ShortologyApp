@@ -82,7 +82,6 @@ class SinglePost extends Component {
     return (
       <PostContainer
         post={data.item}
-        user={this.state.user}
         pauseVideo={this.pauseVideo}
         ref={ref => this.state.postContainer[data.index] = ref}
       />

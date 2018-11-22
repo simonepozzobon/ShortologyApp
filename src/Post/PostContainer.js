@@ -12,17 +12,14 @@ import {
   View,
 } from 'react-native'
 
-import {
-  CommentArea,
-  MainTemplate,
-  PostContent,
-  PostInteractionNav
-} from '../presentation'
-
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-import { withNavigation } from 'react-navigation'
+// Components
+import { CommentArea, MainTemplate, PostContent, PostInteractionNav } from '../presentation'
 import { CommentsList } from '../container'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import config from '../config'
+
+// Libraries
+import { withNavigation } from 'react-navigation'
 
 class PostContainer extends Component {
   constructor(props) {
@@ -34,8 +31,6 @@ class PostContainer extends Component {
       screenWidth: Dimensions.get('window').width,
     }
   }
-
-  // Component State Management
 
   // Methods
   focusComment = (id = null) => {
@@ -68,19 +63,15 @@ class PostContainer extends Component {
 
   // Render
   render() {
-    // Dynamic styles
-    const compStyles = StyleSheet.create({})
-
+    // Component
     let commentList = (
       <CommentsList
         comments={this.state.comments}
         focusComment={this.focusComment}
         deleteComment={this.deleteComment}
-        user={this.props.user}
       />
     )
 
-    // Component
     return (
       <KeyboardAwareScrollView
         extraHeight={148}
@@ -97,13 +88,11 @@ class PostContainer extends Component {
             likeCount={this.state.likeCount}
             commentCount={this.state.commentCount}
             focusComment={this.focusComment}
-            user={this.props.user}
           />
           {this.state.comments.length > 0 ? commentList : null}
           <CommentArea
             id={this.props.post.id}
             updateComments={this.updateComments}
-            user={this.props.user}
             ref={x => this.CommentArea = x}
           />
         </ScrollView>

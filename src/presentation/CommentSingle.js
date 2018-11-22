@@ -8,15 +8,16 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native'
-import { NativeModules } from 'react-native'
+
+// Components
 import ActionSheet from 'react-native-actionsheet'
 import SvgUri from 'react-native-svg-uri'
 import config from '../config'
-import axios from 'axios'
-// import moment from 'moment'
-// import 'moment/min/moment-with-locales'
-// const moment = require('moment/min/moment-with-locales')
 
+// Libraries
+import { NativeModules } from 'react-native'
+import axios from 'axios'
+import { connect } from 'react-redux'
 const distanceInWordsToNow = require('date-fns/distance_in_words_to_now')
 
 // Set locale based on platform
@@ -37,12 +38,12 @@ class CommentSingle extends Component {
       cancelIdx: 2,
       isAuthor: false,
     }
+    console.log(this.props)
   }
 
   // Component State Management
   componentWillMount() {
-
-    if (this.props.user.author.id == this.props.comment.author_id) {
+    if (this.props.user.user.author.id == this.props.comment.author_id) {
       this.setState({
         actionOpts: ['Delete', 'cancel'],
         deleteIdx: 0,
@@ -51,10 +52,7 @@ class CommentSingle extends Component {
         avatarType: 'svg'
       })
     }
-
-
   }
-  componentDidMount() {}
 
   // Methods
   _capitalizedName() {
@@ -73,7 +71,7 @@ class CommentSingle extends Component {
   actionSheetPress = (index) => {
     if (this.state.isAuthor) {
       if (index == 0) {
-        const author_id = this.props.user.author.id
+        const author_id = this.props.user.user.author.id
         const comment_id = this.props.comment.id
         const url = config.api.path + '/app/comments/destroy/' + author_id + '/' + comment_id
 
@@ -93,7 +91,7 @@ class CommentSingle extends Component {
         case 1:
           // Report
           const baseUrl = config.api.path + '/app/comments/report/'
-          const author_id = this.props.user.author.id
+          const author_id = this.props.user.user.author.id
           const comment_id = this.props.comment.id
           axios.get(baseUrl + author_id + '/' + comment_id).then(response => {
             if (response.data.success) {
@@ -237,4 +235,10 @@ const styles = StyleSheet.create({
   },
 })
 
-export default CommentSingle;
+function mapStateToProps(state) {
+  return {
+    user: state.user
+  }
+}
+
+export default connect(mapStateToProps, null)(CommentSingle);
