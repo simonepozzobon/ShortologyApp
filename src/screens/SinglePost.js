@@ -91,20 +91,27 @@ class SinglePost extends Component {
   // Render
   render() {
     // Caricamento
+    let content = (
+      <Carousel
+        ref={ref => this.Carousel = ref}
+        data={this.state.posts}
+        firstItem={this.state.firstItem}
+        renderItem={this.renderItem}
+        sliderWidth={this.state.screenWidth}
+        itemWidth={this.state.screenWidth}
+        removeClippedSubviews={true}
+        onBeforeSnapToItem={this.beforeSnapToItem}
+      />
+    )
+
     if (this.state.isLoading) {
-      return (
-        <MainTemplate
-          color={2}
-          title="It's Monday"
-        >
-          <View style={{flex: 8, justifyContent: 'center', alignItems: 'center'}}>
+      content = (
+          <View style={{flex: 10, justifyContent: 'center', alignItems: 'center'}}>
             <ActivityIndicator
               size="large"
               color={config.colors.primary}
             />
           </View>
-          <View style={{flex: 2}}></View>
-        </MainTemplate>
       )
     }
 
@@ -114,16 +121,7 @@ class SinglePost extends Component {
         title="It's Monday"
         removeScrollView={true}
       >
-        <Carousel
-          ref={ref => this.Carousel = ref}
-          data={this.state.posts}
-          firstItem={this.state.firstItem}
-          renderItem={this.renderItem}
-          sliderWidth={this.state.screenWidth}
-          itemWidth={this.state.screenWidth}
-          removeClippedSubviews={true}
-          onBeforeSnapToItem={this.beforeSnapToItem}
-        />
+        {content}
       </MainTemplate>
     );
   }

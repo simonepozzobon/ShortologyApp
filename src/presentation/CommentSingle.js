@@ -38,7 +38,6 @@ class CommentSingle extends Component {
       cancelIdx: 2,
       isAuthor: false,
     }
-    console.log(this.props)
   }
 
   // Component State Management
