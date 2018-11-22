@@ -1,43 +1,27 @@
-import axios from 'axios'
 
 import {
-  FETCHING_USER_REQUEST,
-  FETCHING_USER_SUCCESS,
-  FETCHING_USER_ERROR,
+  SET_AVATAR,
+  SET_USER,
+  SET_TOKEN,
 } from './types'
 
-export const fetchingUserRequest = () => ({
-  type: FETCHING_USER_REQUEST
-})
+export const setAvatar = (avatar) => {
+  return {
+    type: SET_AVATAR,
+    payload: avatar
+  }
+}
 
-export const fetchingUserSuccess = (json) => ({
-  type: FETCHING_USER_SUCCESS,
-  payload: json
-})
+export const setUser = (user) => {
+  return {
+    type: SET_USER,
+    payload: user
+  }
+}
 
-export const fetchingUserError = (error) => ({
-  type: FETCHING_USER_REQUEST,
-  payload: error
-})
-
-export const getUser = () => {
-  return async dispatch => {
-    // dispatch(fetchingUserRequest()) // show activity indicator
-    // try {
-    //   let response = await fetch('https://randomuser.me/api/?results=15')
-    //   let json = await response.json()
-    //   dispatch(fetchingUserSuccess(json.results))
-    // } catch (error) {
-    //   dispatch(fetchingUserError(error))
-    // }
-
-    // with axios
-    dispatch(fetchingUserRequest()) // show activity indicator
-    axios.get('https://randomuser.me/api/?results=15').then(response => {
-      dispatch(fetchingUserSuccess(response.data))
-    }).catch(error => {
-      dispatch(fetchingUserError(error))
-    })
-
+export const setToken = (token) => {
+  return {
+    type: SET_TOKEN,
+    payload: token
   }
 }

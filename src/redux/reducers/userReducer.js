@@ -1,30 +1,28 @@
 import {
-  FETCHING_USER_REQUEST,
-  FETCHING_USER_SUCCESS,
-  FETCHING_USER_ERROR
+  SET_AVATAR,
+  SET_USER,
+  SET_TOKEN,
 } from '../actions/types'
 
 const initialState = {
-  isFetching: false,
-  errorMessage: '',
-  users: [],
+  avatar: {},
+  user: {},
+  token: null,
+  loading: true,
 }
 
-const userReducer = (state = initialState, action) => {
-  switch (action.type) {
+export default (state = initialState, action) => {
+  switch(action.type) {
+    case SET_AVATAR:
+      return { ...state, avatar: action.payload }
 
-    case FETCHING_USER_REQUEST:
-      return { ...state, isFetching: true }
+    case SET_USER:
+      return { ...state, user: action.payload }
 
-    case FETCHING_USER_SUCCESS:
-      return { ...state, isFetching: false, users: action.payload }
-
-    case FETCHING_USER_ERROR:
-      return { ...state, errorMessage: action.payload }
+    case SET_TOKEN:
+      return { ...state, token: action.payload }
 
     default:
       return state
   }
 }
-
-export default userReducer

@@ -9,10 +9,18 @@ import {
   View,
 } from 'react-native'
 
+// Components
 import { MainTemplate } from '../presentation'
 import { ColorPicker } from '../container'
 import config from '../config'
+
+// Libraries
 import axios from 'axios'
+import { connect } from 'react-redux'
+
+// Redux
+import { setAvatar } from '../redux/actions'
+
 
 const colorsList = [
  '#f1f1e7',
@@ -47,12 +55,6 @@ class MyAvatarColor extends Component {
   }
 
   // Component State Management
-  componentWillMount() {
-    AsyncStorage.getItem('user').then(userJson => {
-      const user = JSON.parse(userJson)
-      this.setState({ author_id: user.author.id })
-    })
-  }
   componentDidMount() {}
 
   // Methods
@@ -64,19 +66,13 @@ class MyAvatarColor extends Component {
     let data = new FormData()
     data.append('id', this.state.imageId)
     data.append('color', this.state.color)
-    data.append('author_id', this.state.author_id)
-    console.log(this.state.imageId, this.state.color, this.state.author_id)
-    axios.post(config.api.path + '/app/avatars/add-background', data)
-      .then(response => {
-        console.log(response)
-        const user = JSON.stringify(response.data.user)
-        AsyncStorage.setItem('user', user).then(() => {
-          this.props.navigation.navigate('profile')
-        })
-      })
-      .catch(err => {
-        console.log(err)
-      })
+    data.append('author_id', this.props.user.author.id)
+    console.log(this.state.imageId, this.state.color, this.props.user.author.id)
+
+    axios.post(config.api.path + '/app/avatars/add-background', data).then(response => {
+      this.props.setAvatar(response.data.user.avatar)
+      this.props.navigation.navigate('profile')
+    })
   }
 
   // Render
@@ -146,4 +142,10 @@ const styles = StyleSheet.create({
   },
 })
 
-export default MyAvatarColor;
+function mapPropsToState(state) {
+  return {
+    user: state.user
+  }
+}
+
+export default connect(mapPropsToState, { setAvatar })(MyAvatarColor);

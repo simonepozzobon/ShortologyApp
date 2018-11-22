@@ -9,10 +9,14 @@ import {
   View,
 } from 'react-native'
 
-import { withNavigation } from 'react-navigation'
+// Components
 import { MainTemplate } from '../presentation'
 import SvgUri from 'react-native-svg-uri'
 import config from '../config'
+
+// Libraries
+import { withNavigation } from 'react-navigation'
+import { connect } from 'react-redux'
 
 const calculateFontSize = (size) => {
   return Math.round(config.utils.screenRatio * size)
@@ -28,27 +32,34 @@ class Profile extends Component {
       avatarType: 'image',
       user: {}
     }
+
+    console.log(this.props)
   }
 
   // Component State Management
   componentWillMount() {
     AsyncStorage.getItem('user').then(userJson => {
-      const user = JSON.parse(userJson)
-      let capitalized = this.capitalizeFirstLetter(user.name)
+      if (userJson) {
+        const user = JSON.parse(userJson)
+        let capitalized = this.capitalizeFirstLetter(user.name)
 
-      console.log(user)
-      this.setState({
-        username: capitalized,
-        avatar: user.avatar.url,
-        avatarType: user.avatar.type ? user.avatar.type : 'svg',
-        user: user,
-      })
+        this.setState({
+          username: capitalized,
+          avatar: user.avatar.url,
+          avatarType: user.avatar.type ? user.avatar.type : 'svg',
+          user: user,
+        })
+      }
     })
   }
 
   // Methods
-  capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
+  capitalizeFirstLetter = () => {
+    if (this.props.user.user) {
+      let user = this.props.user.user.name
+      return user.charAt(0).toUpperCase() + user.slice(1)
+    }
+    return null
   }
 
   goTo(route) {
@@ -57,7 +68,7 @@ class Profile extends Component {
 
   logout = () => {
     console.log('LOGGED OUT')
-    const remove = ['token', 'user', 'email', 'password']
+    const remove = ['email', 'password']
     AsyncStorage.multiRemove(remove, () => {
       this.props.navigation.navigate('Auth')
     })
@@ -81,19 +92,19 @@ class Profile extends Component {
       />
     )
 
-    if (this.state.avatar && this.state.avatarType == 'svg') {
+    if (this.props.user.avatar && this.props.user.avatar.type == 'svg') {
       avatar = (
         <SvgUri
           width={md}
           height={md}
-          source={{ uri: this.state.avatar }}
+          source={{ uri: this.props.user.avatar.url }}
         />
       )
-    } else if (this.state.avatar) {
+    } else if (this.props.user.avatar) {
       avatar = (
         <Image
           style={compStyles.avatar}
-          source={{uri: this.state.avatar}}
+          source={{uri: this.props.user.avatar.url}}
         />
       )
     }
@@ -103,7 +114,7 @@ class Profile extends Component {
       <MainTemplate title="My Shortology">
         <View style={{marginTop: 20}}>
           {avatar}
-          <Text style={styles.username}>{this.state.username}</Text>
+          <Text style={styles.username}>{this.capitalizeFirstLetter()}</Text>
         </View>
         <View>
           <TouchableOpacity style={styles.btnText} onPress={() => {this.goTo('userFavourited')}}>
@@ -170,4 +181,10 @@ const styles = StyleSheet.create({
   }
 })
 
-export default withNavigation(Profile);
+function mapPropsToState(state) {
+  return {
+    user: state.user
+  }
+}
+
+export default connect(mapPropsToState)(withNavigation(Profile));

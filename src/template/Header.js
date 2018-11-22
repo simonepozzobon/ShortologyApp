@@ -8,13 +8,18 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native'
-import { isIphoneX } from 'react-native-iphone-x-helper'
-import { withNavigation } from 'react-navigation'
+
+// Components
 import SvgUri from 'react-native-svg-uri'
 import config from '../config'
 
-let marginTop = 0
+// Libraries
+import { isIphoneX } from 'react-native-iphone-x-helper'
+import { withNavigation } from 'react-navigation'
+import { connect } from 'react-redux'
 
+// Calculate top margin of the header
+let marginTop = 0
 if (Platform.OS === 'ios') {
   if (isIphoneX()) {
     marginTop = 35
@@ -23,12 +28,14 @@ if (Platform.OS === 'ios') {
   }
 }
 
+// programmatic set style for the header
 const compStyles = StyleSheet.create({
   iphone: {
     marginTop: marginTop
   }
 })
 
+// Responsive font size
 const calculateFontSize = (size) => {
   return Math.round(config.utils.screenRatio * size)
 }
@@ -36,21 +43,6 @@ const calculateFontSize = (size) => {
 class Header extends Component {
   constructor() {
     super()
-    this.state = {
-      avatar: null,
-      avatarType: 'image'
-    }
-  }
-
-  // Component State Management
-  componentWillMount() {
-    AsyncStorage.getItem('user').then(userJson => {
-      const user = JSON.parse(userJson)
-      this.setState({
-        avatar: user.avatar.url,
-        avatarType: user.avatar.type ? user.avatar.type : 'svg',
-      })
-    })
   }
 
   // Methods
@@ -60,7 +52,6 @@ class Header extends Component {
 
   // Render
   render() {
-    // Dynamic styles
     const itemOpacity = 0.7
 
     let avatar = (
@@ -70,20 +61,20 @@ class Header extends Component {
       />
     )
 
-    if (this.state.avatar && this.state.avatarType == 'svg') {
+    if (this.props.user.avatar && this.props.user.avatar.type == 'svg') {
       avatar = (
         <SvgUri
           width={45}
           height={45}
-          source={{ uri: this.state.avatar }}
+          source={{ uri: this.props.user.avatar.url }}
           style={styles.svgHeader}
         />
       )
-    } else if (this.state.avatar) {
+    } else if (this.props.user.avatar) {
       avatar = (
         <Image
           style={[styles.headerImageAv, compStyles.iphone]}
-          source={{ uri: this.state.avatar }}
+          source={{ uri: this.props.user.avatar.url }}
         />
       )
     }
@@ -122,6 +113,9 @@ class Header extends Component {
     );
   }
 }
+
+// replace to redux
+
 
 const styles = StyleSheet.create({
   header: {
@@ -162,4 +156,10 @@ const styles = StyleSheet.create({
   },
 })
 
-export default withNavigation(Header);
+function mapStateToProps(state) {
+  return {
+    user: state.user
+  }
+}
+
+export default connect(mapStateToProps, null)(withNavigation(Header));

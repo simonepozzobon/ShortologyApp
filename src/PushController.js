@@ -13,18 +13,20 @@ PushNotification.configure({
 
 
     AsyncStorage.getItem('user').then(userJson => {
-      let user = JSON.parse(userJson)
+      if (userJson) {
+        let user = JSON.parse(userJson)
 
-      let data = new FormData()
-      data.append('token', token.token)
-      data.append('user_id', user.id)
-      data.append('os', token.os)
+        let data = new FormData()
+        data.append('token', token.token)
+        data.append('user_id', user.id)
+        data.append('os', token.os)
 
-      axios.post(config.api.path + '/app/notifications/pair-device', data).then(response => {
-        console.log('Abbiamo una registrazione', response);
-      }).catch(err => {
-        console.log('error', err)
-      })
+        axios.post(config.api.path + '/app/notifications/pair-device', data).then(response => {
+          console.log('Abbiamo una registrazione', response);
+        }).catch(err => {
+          console.log('error', err)
+        })
+      }
     })
 
 
@@ -36,7 +38,7 @@ PushNotification.configure({
     console.log( 'NOTIFICATION:', notification )
     alert('notifica')
     // process the notification
-    
+
 
 
     // required on iOS only (see fetchCompletionHandler docs: https://facebook.github.io/react-native/docs/pushnotificationios.html)
