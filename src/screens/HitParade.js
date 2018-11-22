@@ -6,68 +6,61 @@ import {
   View,
 } from 'react-native'
 
+// Components
 import { MainTemplate } from '../presentation'
 import { HitParadeGrid } from '../container'
 import config from '../config'
 
+// Libraries
 import axios from 'axios'
+import { connect } from 'react-redux'
+import { setHitParade } from '../redux/actions'
 
 class HitParade extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       isLoading: true,
-      posts: [],
     }
   }
 
   // Component State Management
   componentDidMount() {
-    return axios.get(config.api.path + '/app/hit-parade').then(response => {
-      this.setState({
-        isLoading: false,
-        posts: response.data
+    if (this.props.posts.hitParade.length == 0) {
+      axios.get(config.api.path + '/app/hit-parade').then(response => {
+        this.props.setHitParade(response.data)
+        this.setState({isLoading: false})
       })
-    })
+    } else {
+      this.setState({isLoading: false})
+    }
   }
-
-  // Methods
-  method() {}
 
   // Render
   render() {
-    // Dynamic styles
-    const compStyles = StyleSheet.create({})
-
     // Component
     let content = (
       <View style={{flex: 8, justifyContent: 'center', alignItems: 'center'}}>
-        <ActivityIndicator
-          size="large"
-          color={config.colors.primary}
-        />
+        <ActivityIndicator size="large" color={config.colors.primary}/>
       </View>
     )
 
     if (!this.state.isLoading) {
-      content = (
-        <HitParadeGrid
-          posts={this.state.posts}
-        />
-      )
+      content = <HitParadeGrid posts={this.props.posts.hitParade}/>
     }
 
     return (
-      <MainTemplate
-        color={2}
-        title="Hit Parade"
-      >
+      <MainTemplate color={2} title="Hit Parade">
         {content}
       </MainTemplate>
     );
   }
 }
 
-const styles = StyleSheet.create({})
+function mapStateToProps(state) {
+  return {
+    posts: state.posts
+  }
+}
 
-export default HitParade;
+export default connect(mapStateToProps, { setHitParade })(HitParade);

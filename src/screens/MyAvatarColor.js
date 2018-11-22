@@ -142,10 +142,10 @@ const styles = StyleSheet.create({
   },
 })
 
-function mapPropsToState(state) {
+function mapStateToProps(state) {
   return {
     user: state.user
   }
 }
 
-export default connect(mapPropsToState, { setAvatar })(MyAvatarColor);
+export default connect(mapStateToProps, { setAvatar })(MyAvatarColor);
