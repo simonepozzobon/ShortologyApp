@@ -73,7 +73,14 @@ import com.android.build.OutputFile
  */
 
 project.ext.react = [
-    entryFile: "index.js"
+    entryFile: "index.js",
+    bundleInDebug: false,
+    bundleInRelease: true,
+    root: "../../",
+    jsBundleDirDebug: "$buildDir/intermediates/assets/debug",
+    jsBundleDirRelease: "$buildDir/intermediates/assets/release",
+    resourcesDirDebug: "$buildDir/intermediates/res/merged/debug",
+    resourcesDirRelease: "$buildDir/intermediates/res/merged/release",
 ]
 
 apply from: "../../node_modules/react-native/react.gradle"
@@ -95,7 +102,7 @@ def enableProguardInReleaseBuilds = false
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
+    buildToolsVersion '27.0.3'
 
     defaultConfig {
         applicationId "com.shortology"

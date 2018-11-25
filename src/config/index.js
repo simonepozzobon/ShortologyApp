@@ -17,9 +17,9 @@ export default {
     fakeAvatar: require('../../assets/dev/avatar.png'),
 
     // Home Screen
-    itsMonday: { uri: 'its-monday' },
-    itsFriday: { uri: 'its-friday' },
-    hitParade: { uri: 'hit-parade' },
+    itsMonday: { uri: 'its_monday' },
+    itsFriday: { uri: 'its_friday' },
+    hitParade: { uri: 'hit_parade' },
 
     // Auth
     loginAuth: { uri: 'login' },
@@ -29,7 +29,7 @@ export default {
     heart: { uri: 'heart' },
     share: { uri: 'share' },
     comment: { uri: 'comment' },
-    horizontalDots: { uri: 'horizontal-dots' },
+    horizontalDots: { uri: 'horizontal_dots' },
     play: { uri: 'play' },
   },
 

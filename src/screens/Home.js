@@ -44,7 +44,7 @@ class Home extends Component {
     let menuItem = Math.floor(width / menuItemRatio)
     let smallMenuItem = Math.floor(width / smallMenuItemRatio)
 
-    let totalMargin = (20 * 6)
+    let totalMargin = (20 * 6) + 20
     let totalSize = smallMenuItem + (menuItem * 2) + totalMargin
 
     while (totalSize >= height) {
@@ -91,6 +91,9 @@ class Home extends Component {
               <Image source={config.images.hitParade} style={compStyles.smallMenuItem}></Image>
             </TouchableOpacity>
           </View>
+          <View style={styles.footerVersionContainer}>
+            <Text style={styles.footerVersion}>V 1.1.6</Text>
+          </View>
         </MainTemplate>
       </PushController>
     );
@@ -106,6 +109,11 @@ const styles = StyleSheet.create({
     width: 100+'%',
     marginBottom: 25,
   },
+
+  footerVersion: {
+    fontSize: 10,
+    color: '#c7c7c7'
+  }
 
 })
 

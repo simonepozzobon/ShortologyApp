@@ -52,7 +52,7 @@ class PostInteractionNav extends Component {
     const shareOptions = {
       title: 'Shortology',
       message: this.props.title,
-      url: config.website + this.props.slug
+      url: config.website + '/' + this.props.slug
     }
 
     Share.open(shareOptions)
