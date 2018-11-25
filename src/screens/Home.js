@@ -92,7 +92,7 @@ class Home extends Component {
             </TouchableOpacity>
           </View>
           <View style={styles.footerVersionContainer}>
-            <Text style={styles.footerVersion}>V 1.1.6</Text>
+            <Text style={styles.footerVersion}>V 1.1.7</Text>
           </View>
         </MainTemplate>
       </PushController>

@@ -4,6 +4,7 @@ import {
   AsyncStorage,
   Dimensions,
   Image,
+  Linking,
   StyleSheet,
   Text,
   View,
@@ -28,7 +29,6 @@ class AuthLoading extends Component {
     this.state = {
       screenWidth: Dimensions.get('window').width
     }
-
     this._reAuthenticateUser()
   }
 

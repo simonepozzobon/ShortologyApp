@@ -94,13 +94,9 @@ class ShortologyNews extends Component {
     this.state = {}
   }
 
-  componentWillMount() {
-
-  }
-
-  componentDidMount() {
-
-  }
+  componentWillMount() {}
+  componentDidMount() {}
+  
   render() {
     return (
         <MainStack/>

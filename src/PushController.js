@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
 import {
   AsyncStorage,
+  Linking,
   PushNotificationIOS,
 } from 'react-native'
+
+import { withNavigation } from 'react-navigation'
 import PushNotification from 'react-native-push-notification'
 import config from './config'
 import axios from 'axios'
@@ -10,8 +13,6 @@ import axios from 'axios'
 PushNotification.configure({
   onRegister: function(token) {
     // console.log( 'TOKEN:', token )
-
-
     AsyncStorage.getItem('user').then(userJson => {
       if (userJson) {
         let user = JSON.parse(userJson)
@@ -28,9 +29,6 @@ PushNotification.configure({
         })
       }
     })
-
-
-
   },
 
   // (required) Called when a remote or local notification is opened or received
@@ -73,11 +71,37 @@ class PushController extends Component {
     console.log(PushNotification)
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    // if the app were closed
+    Linking.getInitialURL().then(url => {
+      this._handleOpenURL(url)
+    })
+
+    // if the app is open and on the background
+    Linking.addEventListener('url', e => {
+      this._handleOpenURL(e.url)
+    })
+  }
+
+  componentWillUnmount() {
+    // Remove the listener when closing the app
+    Linking.removeEventListener('url', this._handleOpenURL)
+  }
+
+  _handleOpenURL = (url) => {
+    // se c'è un url iniziale
+    if (url) {
+      const route = url.replace(/.*?:\/\//g, '')
+      const slug = route.match(/\/([^\/]+)\/?$/)[1]
+      this.props.navigation.navigate('singlePost', {
+        slug: slug
+      })
+    }
+  }
 
   render() {
     return this.props.children
   }
 }
 
-export default PushController;
+export default withNavigation(PushController);
