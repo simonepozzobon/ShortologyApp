@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "271542798031",
+    "firebase_url": "https://shortology-9face.firebaseio.com",
+    "project_id": "shortology-9face",
+    "storage_bucket": "shortology-9face.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:271542798031:android:5aa3be4ddedfe0c6",
+        "android_client_info": {
+          "package_name": "com.shortology"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "271542798031-f50vj1gq63u17lh4c87n2qek12dc9qdb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAT5V6oyhVW_HfbLdBfo-qJwu2KTN_W5iY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

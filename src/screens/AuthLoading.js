@@ -102,6 +102,7 @@ class AuthLoading extends Component {
       }
     })
 
+
     // Component
     return (
       <MainTemplate
